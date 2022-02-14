@@ -1,0 +1,22 @@
+{
+  "name": "worktracker",
+  "version": "1.0.0",
+  "description": "WorkTracker - school seminar project",
+  "main": "server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "server": "nodemon backend/server.js"
+  },
+  "keywords": [
+    "work",
+    "time",
+    "tracker"
+  ],
+  "author": "Jan Joska",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "express": "^4.17.2",
+    "mongoose": "^6.2.1"
+  }
+}
