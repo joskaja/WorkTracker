@@ -5,7 +5,7 @@ const Client = require('../models/clientModel');
 @route GET /api/work-sessions
 **/
 const getClients = asyncHandler(async (req, res) => {
-    const clients = await Client.find({});
+    const clients = await Client.find({ user: req.user.id });
     res.json(clients);
 });
 
@@ -19,8 +19,9 @@ const createClient = asyncHandler(async (req, res) => {
         throw new Error('Název klienta je povinný');
     }
     const client = new Client({
+        user: req.user.id,
         name: req.body.name,
-        hourRate: req.body.hourRate
+        address: req.body.address
     });
     client.save();
     res.json(client)
@@ -41,10 +42,16 @@ const getClient = asyncHandler(async (req, res) => {
 **/
 const updateClient = asyncHandler(async (req, res) => {
     const client = await Client.findById(req.params.id);
-    if (!client) throw new Error('Client nebyl nalezen');
-
+    if (!client) {
+        res.status(404);
+        throw new Error('Client nebyl nalezen');
+    }
+    if (client.user.toString() !== req.user.id) {
+        res.status(401);
+        throw new Error('Uživatel nemá k této akci oprávnění');
+    }
     client.name = req.body.name || client.name;
-    client.hourRate = req.body.hourRate || client.hourRate;
+    client.address = req.body.address || client.name;
 
     await client.save();
     res.json(client)
@@ -55,7 +62,14 @@ const updateClient = asyncHandler(async (req, res) => {
 **/
 const deleteClient = asyncHandler(async (req, res) => {
     const client = await Client.findById(req.params.id);
-    if (!client) throw new Error('Client nebyl nalezen');
+    if (!client) {
+        res.status(404);
+        throw new Error('Client nebyl nalezen');
+    }
+    if (client.user.toString() !== req.user.id) {
+        res.status(401);
+        throw new Error('Uživatel nemá k této akci oprávnění');
+    }
     await client.remove();
     res.json({ message: `DELETE client ID: ${req.params.id}` })
 });

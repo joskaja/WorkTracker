@@ -1,6 +1,4 @@
 const mongoose = require('mongoose');
-const Client = require('./clientModel');
-const User = require('./userModel');
 
 const workSessionSchema = mongoose.Schema(
     {
@@ -9,11 +7,13 @@ const workSessionSchema = mongoose.Schema(
             required: [true, 'Záznam musí mít název']
         },
         user: {
-            type: User.schema,
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
             required: [true, 'Záznam musí být přiřazen uživateli']
         },
         client: {
-            type: Client.schema,
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Client',
             required: [true, 'Záznam musí být přiřazen ke klientovi']
         },
         timeStart: {

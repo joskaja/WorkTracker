@@ -2,17 +2,18 @@ const mongoose = require('mongoose');
 
 const userSchema = mongoose.Schema(
     {
-        first_name: {
+        firstName: {
             type: String,
             required: [true, 'Uživatel musí mít křestní jméno']
         },
-        last_name: {
+        lastName: {
             type: String,
             required: [true, 'Uživatel musí mít příjmení']
         },
         email: {
             type: String,
-            required: [true, 'Uživatel musí mít e-mail']
+            required: [true, 'Uživatel musí mít e-mail'],
+            unique: true
         },
         password: {
             type: String,

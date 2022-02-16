@@ -7,11 +7,12 @@ const {
     updateClient,
     deleteClient
 } = require('../controllers/clientController');
+const protectRoute = require('../middleware/authMiddleware');
 
-router.get('/', getClients);
-router.post('/', createClient);
-router.get('/:id', getClient);
-router.put('/:id', updateClient);
-router.delete('/:id', deleteClient);
+router.get('/', protectRoute, getClients);
+router.post('/', protectRoute, createClient);
+router.get('/:id', protectRoute, getClient);
+router.put('/:id', protectRoute, updateClient);
+router.delete('/:id', protectRoute, deleteClient);
 
 module.exports = router

@@ -12,6 +12,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use('/api/work-sessions', require('./routes/workSessionsRoutes'));
 app.use('/api/clients', require('./routes/clientRoutes'));
+app.use('/api/users', require('./routes/userRoutes'));
 
 app.use((req, res) => {
     res.status(404);

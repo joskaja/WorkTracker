@@ -1,19 +1,26 @@
 /* eslint-disable no-undef */
 const mongoose = require('mongoose');
-const User = require('./userModel');
-
+const clientAddressSchema = mongoose.Schema({
+    city: String,
+    street: String,
+    zipCode: String
+})
 const clientSchema = mongoose.Schema(
     {
         name: {
             type: String,
             required: [true, 'Klient musí mít název']
         },
-        hourRate: {
-            type: mongoose.Decimal128
+        email: {
+            type: String
+        },
+        address: {
+            type: clientAddressSchema
         },
         user: {
-            type: User.schema
-            // required: [true, 'Klient musí být přiřazen k uživateli']
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
+            required: [true, 'Klient musí být přiřazen k uživateli']
         }
     },
     {
