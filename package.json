@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node backend/server.js",
-    "server": "nodemon backend/server.js"
+    "server": "nodemon backend/server.js",
+    "client": "npm start --prefix frontend"
   },
   "keywords": [
     "work",
@@ -15,7 +16,13 @@
   "author": "Jan Joska",
   "license": "MIT",
   "dependencies": {
+    "@mantine/core": "^3.6.7",
+    "@mantine/dates": "^3.6.7",
+    "@mantine/hooks": "^3.6.7",
+    "@mantine/modals": "^3.6.7",
+    "@mantine/notifications": "^3.6.7",
     "bcryptjs": "^2.4.3",
+    "dayjs": "^1.10.7",
     "dotenv": "^16.0.0",
     "express": "^4.17.2",
     "express-async-handler": "^1.2.0",
