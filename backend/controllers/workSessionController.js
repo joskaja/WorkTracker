@@ -1,10 +1,15 @@
 const asyncHandler = require('express-async-handler');
+const WorkSession = require('../models/workSessionModel');
 /**
 @desc Get work sessions
 @route GET /api/work-sessions
 **/
 const getWorkSessions = asyncHandler(async (req, res) => {
-    res.json({ message: 'GET work sessions' })
+    const workSessions = await WorkSession.find({});
+    res.json({
+        message: 'GET work sessions',
+        workSessions: workSessions
+    });
 });
 
 /**

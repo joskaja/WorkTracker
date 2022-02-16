@@ -11,7 +11,12 @@
         "ecmaVersion": 12
     },
     "rules": {
-        "indent": ["error", 4],
-        "semi": 0
+        "indent": [
+            "error",
+            4
+        ],
+        "semi": 0,
+        "eol-last": "off",
+        "no-unused-vars": "warn"
     }
 }

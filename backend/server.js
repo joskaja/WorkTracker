@@ -1,15 +1,17 @@
 const express = require('express');
-// eslint-disable-next-line no-unused-vars
 const dotenv = require('dotenv').config();
 const port = process.env.NODE_PORT || 5000;
+const connectDB = require('./config/db');
 const { handleError } = require('./middleware/errorMiddleware');
 
 const app = express();
+connectDB();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use('/api/work-sessions', require('./routes/workSessionsRoutes'));
+app.use('/api/clients', require('./routes/clientRoutes'));
 
 app.use((req, res) => {
     res.status(404);
