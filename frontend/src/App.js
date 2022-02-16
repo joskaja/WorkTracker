@@ -1,15 +1,23 @@
 import React from 'react';
 import { MantineProvider } from '@mantine/core';
+import { useColorScheme } from '@mantine/hooks';
+import Router from './Router';
+import Header from './components/Header';
 
 function App() {
+  const preferredColorScheme = useColorScheme();
   return (
     <MantineProvider
       theme={{
-        fontFamily: 'Open Sans, sans serif',
-        colorScheme: 'dark'
+        colorScheme: preferredColorScheme,
+        primaryColor: 'indigo'
       }}
+      withNormalizeCSS 
+      withGlobalStyles
     >
-      <h1>Work Tracker</h1>
+      <Router>
+        <Header />
+      </Router>
     </MantineProvider>
   );
 }
