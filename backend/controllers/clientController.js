@@ -20,8 +20,15 @@ const createClient = asyncHandler(async (req, res) => {
     }
     const client = new Client({
         user: req.user.id,
+        email: req.body.email,
         name: req.body.name,
-        address: req.body.address
+        phone: req.body.phone,
+        color: req.body.color,
+        address: {
+            street: req.body.street,
+            city: req.body.city,
+            zipCode: req.body.zipCode
+        }
     });
     client.save();
     res.json(client)
@@ -50,9 +57,15 @@ const updateClient = asyncHandler(async (req, res) => {
         res.status(401);
         throw new Error('Uživatel nemá k této akci oprávnění');
     }
-    client.name = req.body.name || client.name;
-    client.address = req.body.address || client.name;
-
+    client.email = req.body.email;
+    client.name = req.body.name;
+    client.phone = req.body.phone;
+    client.color = req.body.color;
+    client.address = {
+        street: req.body.street,
+        city: req.body.city,
+        zipCode: req.body.zipCode
+    };
     await client.save();
     res.json(client)
 });

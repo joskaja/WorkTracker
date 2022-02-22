@@ -14,8 +14,14 @@ const clientSchema = mongoose.Schema(
         email: {
             type: String
         },
+        phone: {
+            type: String
+        },
         address: {
             type: clientAddressSchema
+        },
+        color: {
+            type: String
         },
         user: {
             type: mongoose.Schema.Types.ObjectId,
