@@ -1,23 +1,32 @@
 import React from 'react';
-import { MantineProvider } from '@mantine/core';
+import { MantineProvider, useMantineTheme } from '@mantine/core';
+import { NotificationsProvider } from '@mantine/notifications';
 import { useColorScheme } from '@mantine/hooks';
 import Router from './Router';
 import Header from './components/Header';
 
 function App() {
   const preferredColorScheme = useColorScheme();
+  const theme = useMantineTheme();
   return (
     <MantineProvider
       theme={{
-        colorScheme: preferredColorScheme,
-        primaryColor: 'indigo'
+        primaryColor: 'indigo',
+        colorScheme: preferredColorScheme
       }}
-      withNormalizeCSS 
+      styles={{
+        Paper: (theme) => ({
+          root: {
+            backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : 'white',
+          }
+        })
+      }}
+      withNormalizeCSS
       withGlobalStyles
     >
-      <Router>
-        <Header />
-      </Router>
+      <NotificationsProvider>
+        <Router />
+      </NotificationsProvider>
     </MantineProvider>
   );
 }

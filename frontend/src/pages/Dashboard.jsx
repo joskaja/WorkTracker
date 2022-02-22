@@ -1,11 +1,12 @@
-import React from 'react'
-import { AppShell } from '@mantine/core'
-import Header from '../components/Header'
+import { Paper, Title } from '@mantine/core'
+import React, { useEffect } from 'react'
+import AppShell from '../components/AppShell'
 function Dashboard() {
     return (
-        <AppShell
-        >
-Dashboard
+        <AppShell>
+           <Paper shadow="sm" radius="md" padding="xl">
+               <Title order={2}>Dashboard</Title>
+           </Paper>
         </AppShell>
     )
 }
