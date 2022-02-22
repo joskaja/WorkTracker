@@ -23,6 +23,9 @@ const clientSchema = mongoose.Schema(
         color: {
             type: String
         },
+        defaultHourRate: {
+            type: mongoose.Schema.Types.Decimal128
+        },
         user: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User',
