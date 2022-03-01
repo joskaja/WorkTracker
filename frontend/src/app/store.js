@@ -6,6 +6,6 @@ import apiAuth from '../middleware/apiRequestAuthMiddleware';
 export const store = configureStore({
   reducer: {
     auth: authReducer
-  },
+    },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiAuth)
 });

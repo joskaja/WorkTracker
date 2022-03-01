@@ -1,7 +1,9 @@
+const user = JSON.parse(localStorage.getItem('user'));
 
 const commonOptions = {
     headers: {
         'Content-Type': 'application/json',
+        'Authorization': user?.token ? 'Bearer: ' + user.token : '',
     },
 };
 
@@ -11,6 +13,7 @@ const get = (url) => {
         ...commonOptions,
         method: 'GET'
     }
+    console.log(requestOptions);
     return fetch(url, requestOptions).then(handleResponse);
 }
 
@@ -41,6 +44,7 @@ const _delete = (url) => {
 }
 
 const handleResponse = (response) => {
+    console.log(response);
     return response.json().then(data => {
         if (!response.ok) {
             const error = (data && data.message) || response.statusText;

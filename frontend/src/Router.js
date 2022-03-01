@@ -1,5 +1,10 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import AuthRoute from './components/AuthRoute';
+import ClientForm from './components/Clients/ClientForm';
+import ClientsList from './components/Clients/ClientsList';
+import ProjectForm from './components/Projects/ProjectForm';
+import ProjectsList from './components/Projects/ProjectsList';
 import Clients from './pages/Clients';
 import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
@@ -13,12 +18,20 @@ function Router({ children }) {
             <BrowserRouter>
                 {children}
                 <Routes>
-                    <Route path="/" element={<Dashboard />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
-                    <Route path="/reports" element={<Reports />} />
-                    <Route path="/projects" element={<Projects />} />
-                    <Route path="/clients" element={<Clients />} />
+                    <Route path="/" element={<AuthRoute><Dashboard /></AuthRoute>} />
+                    <Route path="/reports" element={<AuthRoute><Reports /></AuthRoute>} />
+                    <Route path="/projects" element={<AuthRoute><Projects /></AuthRoute>}>
+                        <Route index element={<ProjectsList />} />
+                        <Route path="new" element={<ProjectForm/>} />
+                        <Route path=":projectID" element={<ProjectForm />} />
+                    </Route>
+                    <Route path="/clients" element={<AuthRoute><Clients /></AuthRoute>} >
+                        <Route index element={<ClientsList />} />
+                        <Route path="new" element={<ClientForm />} />
+                        <Route path=":clientID" element={<ClientForm />} />
+                    </Route>
                 </Routes>
             </BrowserRouter>
         </>

@@ -1,0 +1,67 @@
+import React from 'react'
+import { Paper, Group, Button, Text, Title, Box, Grid, createStyles } from '@mantine/core'
+import { Link } from 'react-router-dom'
+import { MdAttachMoney, MdOutlineStore } from 'react-icons/md'
+
+const useStyles = createStyles(theme => ({
+    paper: {
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100%',
+        borderColor: theme.colorScheme === 'dark' ? theme.colors.dark[4] : ''
+    },
+    icon: {
+        flexShrink: 0,
+        fontSize: theme.fontSizes.lg,
+        color: theme.colors.cyan
+    },
+    col: {
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis'
+    },
+    body: {
+        marginBottom: theme.spacing.sm
+    },
+    footer: {
+        marginTop: 'auto'
+    }
+})
+);
+
+
+function Project({ data, onDelete }) {
+    const { classes } = useStyles();
+
+    return (
+        <Paper shadow="sm" className={classes.paper} withBorder padding="lg">
+            <Grid className={classes.body}>
+                <Grid.Col sm={12}>
+                    <Text size="xl" weight={500} component={Link} to={`/projects/${data._id}`}>{data.name}</Text>
+                </Grid.Col>
+                {(data.client && data.client.name) &&
+                    <Grid.Col sm={6} className={classes.col}>
+                        <Group noWrap spacing="xs">
+                            <MdOutlineStore className={classes.icon} />
+                            <Text>{data.client.name}</Text>
+                        </Group>
+                    </Grid.Col>
+                }
+                {data.hourRate > 0 &&
+                    <Grid.Col sm={6} className={classes.col}>
+                        <Group noWrap spacing="xs">
+                            <MdAttachMoney className={classes.icon} />
+                            <Text>{data.hourRate}&nbsp;Kč</Text>
+                        </Group>
+                    </Grid.Col>
+                }
+            </Grid>
+            <Group className={classes.footer} grow>
+                <Button component={Link} to={`/projects/${data._id}`}>Upravit</Button>
+                <Button color="red" onClick={() => onDelete(data._id)}>Odstranit</Button>
+            </Group>
+        </Paper>
+    )
+}
+
+export default Project

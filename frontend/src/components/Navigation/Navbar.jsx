@@ -1,14 +1,15 @@
 import React from 'react'
-import { Navbar as MantineNavbar, Box } from '@mantine/core'
+import { Navbar as MantineNavbar, Box, Badge } from '@mantine/core'
 import NavLink from './NavLink'
 import { MdWorkOutline, MdOutlineHome, MdOutlineFolder, MdOutlineStore } from 'react-icons/md'
 import NavUser from './NavUser'
 function Navbar(props) {
+    const {withBurger, menuOpened, toggleMenu, ...navbarProps} = props;
     return (
-        <MantineNavbar {...props}>
+        <MantineNavbar {...navbarProps}>
             <MantineNavbar.Section grow>
-                <NavLink to="/" icon={<MdOutlineHome />}>Domovská obrazovka</NavLink>
-                <NavLink to="/reports" icon={<MdWorkOutline />}>Přehled práce</NavLink>
+                <NavLink to="/" icon={<MdOutlineHome />}>Domů</NavLink>
+                <NavLink to="/reports" icon={<MdWorkOutline />}>Výkazy</NavLink>
                 <NavLink to="/projects" icon={<MdOutlineFolder />}>Projekty</NavLink>
                 <NavLink to="/clients" icon={<MdOutlineStore />}>Zákazníci</NavLink>
             </MantineNavbar.Section>

@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { UnstyledButton, Avatar, Text, Group, Box, createStyles } from '@mantine/core'
+import { UnstyledButton, Text, Group, Box, createStyles, Badge } from '@mantine/core'
 import { NavLink as RouterNavLink } from 'react-router-dom'
 
 const useStyles = createStyles(theme => ({
@@ -25,9 +25,9 @@ const useStyles = createStyles(theme => ({
         '&:after': {
             content: '" "',
             position: 'absolute',
-            height: 'calc(100% - 10px)',
+            height: 'calc(100% - 15px)',
             width: '5px',
-            margin: '5px 0',
+            margin: '7.5px 0',
             top: 0,
             left: '-5px',
             borderRadius: '0px 8px 8px 0px',
@@ -41,24 +41,27 @@ const useStyles = createStyles(theme => ({
     text: {
         fontSize: theme.fontSizes.sm,
         color: theme.colorScheme === 'dark' ? theme.colors.gray[5] : theme.colors.gray[9]
+    },
+    badge: {
+        marginLeft: 'auto'
     }
 })
 );
 
-function NavLink({ children, icon, to }) {
+function NavLink({ children, badge, icon, to }) {
     const { classes } = useStyles();
-    console.log(classes);
     return (
         <Box className={classes.wrapper}>
             <UnstyledButton
                 component={RouterNavLink}
                 to={to}
-                activeClassName="active"
+                className={({isActive}) => classes.button + (isActive ? ' active' : '')}
                 className={classes.button}
             >
                 <Group>
                     {icon}
                     <Text className={classes.text}>{children}</Text>
+                    {badge && <Badge className={classes.badge}>{badge}</Badge>}
                 </Group>
             </UnstyledButton>
         </Box>

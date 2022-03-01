@@ -3,7 +3,6 @@ import { MantineProvider, useMantineTheme } from '@mantine/core';
 import { NotificationsProvider } from '@mantine/notifications';
 import { useColorScheme } from '@mantine/hooks';
 import Router from './Router';
-import Header from './components/Header';
 
 function App() {
   const preferredColorScheme = useColorScheme();
@@ -12,7 +11,10 @@ function App() {
     <MantineProvider
       theme={{
         primaryColor: 'indigo',
-        colorScheme: preferredColorScheme
+        colorScheme: preferredColorScheme,
+        breakpoints: {
+          xl: 1600
+        }
       }}
       styles={{
         Paper: (theme) => ({
@@ -24,7 +26,7 @@ function App() {
       withNormalizeCSS
       withGlobalStyles
     >
-      <NotificationsProvider>
+      <NotificationsProvider position="top-right">
         <Router />
       </NotificationsProvider>
     </MantineProvider>

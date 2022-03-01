@@ -1,9 +1,8 @@
 import { apiRequestService } from '../../services/apiRequestService';
-const REGISTER_URL = '/api/users';
-const LOGIN_URL = '/api/users/login';
+const API_URL = '/api/users';
 
 const register = async (user) => {
-    let data = await apiRequestService.post(REGISTER_URL, user);
+    let data = await apiRequestService.post(API_URL, user);
     const userData = data.user;
     if (data) {
         localStorage.setItem('user', JSON.stringify(userData));
@@ -13,7 +12,7 @@ const register = async (user) => {
 }
 
 const login = async (user) => {
-    let data = await apiRequestService.post(LOGIN_URL, user);
+    let data = await apiRequestService.post(API_URL + '/login', user);
     const userData = data.user;
     if (data) {
         localStorage.setItem('user', JSON.stringify(userData));

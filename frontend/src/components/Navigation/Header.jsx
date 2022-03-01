@@ -3,12 +3,12 @@ import { Header as MantineHeader, Group, Burger, Title, Button, MediaQuery } fro
 import { Link, useNavigate } from 'react-router-dom';
 import { MdPersonAddAlt, MdPersonOutline, MdOutlineLogout } from 'react-icons/md';
 import { useSelector, useDispatch } from 'react-redux';
-import { logout, reset } from '../features/Auth/authSlice';
-import logo from '../resources/img/logo.png';
+import { logout, reset } from '../../features/Auth/authSlice';
+import logo from '../../resources/img/logo.png';
 
 function Header(props) {
     const { user } = useSelector(state => state.auth);
-    let { withBurger, menuOpened, toggleMenu } = props;
+    const {withBurger, menuOpened, toggleMenu, ...headerProps} = props;
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -19,14 +19,14 @@ function Header(props) {
     }
 
     return (
-        <MantineHeader {...props}>
+        <MantineHeader {...headerProps}>
             <Group>
                 <Group>
-                    {withBurger && (
+                    {props.withBurger && (
                         <MediaQuery largerThan="md" styles={{ display: 'none' }}>
                             <Burger
-                                opened={menuOpened}
-                                onClick={() => toggleMenu(opened => !opened)}
+                                opened={props.menuOpened}
+                                onClick={() => props.toggleMenu(opened => !opened)}
                             />
                         </MediaQuery>
                     )}

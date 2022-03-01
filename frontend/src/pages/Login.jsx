@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useNotifications } from '@mantine/notifications';
 import { login, reset } from '../features/Auth/authSlice';
-import Header from '../components/Header';
+import Header from '../components/Navigation/Header';
 
 const useStyles = createStyles(theme => ({
   paper: {

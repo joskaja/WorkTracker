@@ -4,8 +4,8 @@ import { MdPersonAddAlt, MdCancel } from 'react-icons/md';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNotifications } from '@mantine/notifications';
 import { useNavigate } from 'react-router-dom';
-import { register, reset } from '../features/Auth/authSlice';
-import Header from '../components/Header';
+import { register } from '../features/Auth/authSlice';
+import Header from '../components/Navigation/Header';
 
 const useStyles = createStyles(theme => ({
     paper: {
