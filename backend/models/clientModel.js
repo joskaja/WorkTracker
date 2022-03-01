@@ -1,10 +1,6 @@
 /* eslint-disable no-undef */
 const mongoose = require('mongoose');
-const clientAddressSchema = mongoose.Schema({
-    city: String,
-    street: String,
-    zipCode: String
-})
+
 const clientSchema = mongoose.Schema(
     {
         name: {
@@ -18,13 +14,15 @@ const clientSchema = mongoose.Schema(
             type: String
         },
         address: {
-            type: clientAddressSchema
+            city: String,
+            street: String,
+            zipCode: String
         },
         color: {
             type: String
         },
         defaultHourRate: {
-            type: mongoose.Schema.Types.Decimal128
+            type: Number
         },
         user: {
             type: mongoose.Schema.Types.ObjectId,

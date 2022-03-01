@@ -5,7 +5,7 @@ const Client = require('../models/clientModel');
 @route GET /api/work-sessions
 **/
 const getClients = asyncHandler(async (req, res) => {
-    const clients = await Client.find({ user: req.user.id });
+    const clients = await Client.where('user').equals(req.user.id);
     res.json(clients);
 });
 
@@ -22,6 +22,7 @@ const createClient = asyncHandler(async (req, res) => {
         user: req.user.id,
         email: req.body.email,
         name: req.body.name,
+        defaultHourRate: req.body.defaultHourRate,
         phone: req.body.phone,
         color: req.body.color,
         address: {
@@ -31,6 +32,7 @@ const createClient = asyncHandler(async (req, res) => {
         }
     });
     client.save();
+    console.log(client);
     res.json(client)
 });
 
@@ -61,6 +63,7 @@ const updateClient = asyncHandler(async (req, res) => {
     client.name = req.body.name;
     client.phone = req.body.phone;
     client.color = req.body.color;
+    client.defaultHourRate = req.body.defaultHourRate;
     client.address = {
         street: req.body.street,
         city: req.body.city,

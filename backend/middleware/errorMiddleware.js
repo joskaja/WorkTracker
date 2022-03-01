@@ -1,10 +1,17 @@
 const handleError = (err, req, res, next) => {
-    const statusCode = res.statusCode || 500;
-
+    console.log(err);
+    const statusCode = res.statusCode && res.statusCode > 299 ? res.statusCode : 500;
     res.status(statusCode);
 
+    let message = err.message;
+
+    if (err.name === 'ValidationError') {
+        message = Object.values(err.errors).join(',');
+    }
+
     res.json({
-        message: err.message,
+        code: statusCode,
+        message: message,
         stack: process.env.NODE_ENV === 'production' ? null : err.stack
     });
 }

@@ -5,7 +5,7 @@ const Project = require('../models/projectModel');
 @route GET /api/work-sessions
 **/
 const getProjects = asyncHandler(async (req, res) => {
-    const projects = await Project.find({ user: req.user.id });
+    const projects = await Project.where('user').equals(req.user.id).populate('client');
     res.json(projects);
 });
 
@@ -20,9 +20,9 @@ const createProject = asyncHandler(async (req, res) => {
     }
     const project = new Project({
         user: req.user.id,
-        project: req.user.projectID,
         name: req.body.name,
-        hourRate: req.body.hourRate
+        hourRate: req.body.hourRate,
+        client: req.body.client || null
     });
     project.save();
     res.json(project)
@@ -52,7 +52,8 @@ const updateProject = asyncHandler(async (req, res) => {
         throw new Error('Uživatel nemá k této akci oprávnění');
     }
     project.name = req.body.name || project.name;
-    project.hourRate = req.body.hourRate || project.hourRate;
+    project.hourRate = req.body.hourRate;
+    project.client = req.body.client;
 
     await project.save();
     res.json(project)

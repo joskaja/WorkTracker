@@ -7,7 +7,7 @@ const projectSchema = mongoose.Schema(
             required: [true, 'Projekt musí mít název']
         },
         hourRate: {
-            type: mongoose.Schema.Types.Decimal128
+            type: Number
         },
         user: {
             type: mongoose.Schema.Types.ObjectId,
