@@ -1,12 +1,14 @@
 import { Paper, Title } from '@mantine/core'
 import React, { useEffect } from 'react'
 import AppShell from '../components/AppShell'
+import WorkSessionForm from '../components/WorkSessions/WorkSessionForm'
 function Dashboard() {
     return (
         <AppShell>
-           <Paper shadow="sm" radius="md" padding="xl">
-               <Title order={2}>Dashboard</Title>
-           </Paper>
+            <Title order={2} mb="sm" ml="lg">Dashboard</Title>
+            <Paper shadow="sm" radius="md" padding="xl">
+                <WorkSessionForm />
+            </Paper>
         </AppShell>
     )
 }

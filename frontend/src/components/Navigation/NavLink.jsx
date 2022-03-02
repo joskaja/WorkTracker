@@ -13,7 +13,7 @@ const useStyles = createStyles(theme => ({
         textDecoration: 'none !important',
         transition: 'background .3s',
         padding: '12px 12px 12px 24px',
-        fontSize: theme.fontSizes.lg,
+        fontSize: theme.fontSizes.md,
         '&:hover': {
             background: theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[1],
             color: theme.colors[theme.primaryColor],

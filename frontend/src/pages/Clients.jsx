@@ -7,12 +7,16 @@ function Clients() {
 
     return (
         <AppShell>
+            <Group mb="sm" mx="lg">
+                <Title order={2}>Moji zákazníci</Title>
+                <Button
+                    component={Link}
+                    variant="subtle"
+                    to="/clients/new"
+                    ml="auto"
+                >Přidat nového zákazníka</Button>
+            </Group>
             <Paper shadow="sm" radius="md" padding="xl" style={{ position: 'relative', minHeight: '100%' }}>
-                <Group mb="md">
-                    <Title order={2}>Moji zákazníci</Title>
-                    <Button component={Link} to="/clients/new" ml="auto">Přidat nového zákazníka</Button>
-                </Group>
-                <Divider my="lg" size="xs"/>
                 <Outlet />
             </Paper>
         </AppShell>

@@ -1,10 +1,10 @@
 import React from 'react'
 import { Header as MantineHeader, Group, Burger, Title, Button, MediaQuery } from '@mantine/core';
 import { Link, useNavigate } from 'react-router-dom';
-import { MdPersonAddAlt, MdPersonOutline, MdOutlineLogout } from 'react-icons/md';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout, reset } from '../../features/Auth/authSlice';
 import logo from '../../resources/img/logo.png';
+import { IoLogOutOutline, IoPersonAddOutline, IoPersonOutline } from 'react-icons/io5';
 
 function Header(props) {
     const { user } = useSelector(state => state.auth);
@@ -40,7 +40,7 @@ function Header(props) {
                                 <Button
                                     variant="subtle"
                                     onClick={onLogout}
-                                    leftIcon={<MdOutlineLogout size={18} />}
+                                    leftIcon={<IoLogOutOutline size={18} />}
                                 >
                                     Odhlásit se
                                 </Button>
@@ -53,7 +53,7 @@ function Header(props) {
                                     component={Link}
                                     to="/register"
                                     variant="outline" color="indigo"
-                                    leftIcon={<MdPersonAddAlt size={18} />}
+                                    leftIcon={<IoPersonAddOutline size={18} />}
                                 >
                                     Registrovat se
                                 </Button>
@@ -61,7 +61,7 @@ function Header(props) {
                                     component={Link}
                                     to="/login"
                                     variant="gradient" gradient={{ from: 'indigo', to: 'cyan' }}
-                                    leftIcon={<MdPersonOutline size={18} />}
+                                    leftIcon={<IoPersonOutline size={18} />}
                                 >
                                     Přihlásit se
                                 </Button>

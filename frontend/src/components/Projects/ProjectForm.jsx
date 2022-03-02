@@ -63,7 +63,7 @@ function ProjectForm() {
         setLoading(false);
         notifications.showNotification({
             title: 'Úspěch',
-            message: 'Zákazník byl úspěšně uložen',
+            message: 'Projekt byl úspěšně uložen',
             color: 'green',
             icon: <MdCheckCircle />
         });

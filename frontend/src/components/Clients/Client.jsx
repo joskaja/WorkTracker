@@ -1,7 +1,7 @@
 import React from 'react'
 import { Paper, Group, Button, Text, Title, Box, Grid, createStyles, ColorSwatch } from '@mantine/core'
 import { Link } from 'react-router-dom'
-import { MdAttachMoney, MdLocationCity, MdMailOutline, MdOutlinePhone } from 'react-icons/md'
+import { IoLogoUsd, IoIosMail, IoIosCall, IoIosBusiness } from 'react-icons/io'
 
 const useStyles = createStyles(theme => ({
     paper: {
@@ -12,7 +12,7 @@ const useStyles = createStyles(theme => ({
     },
     icon: {
         flexShrink: 0,
-        fontSize: theme.fontSizes.lg,
+        fontSize: theme.fontSizes.md,
         color: theme.colors.cyan
     },
     col: {
@@ -33,7 +33,7 @@ function Client({ data, onDelete }) {
     const { classes } = useStyles();
 
     return (
-        <Paper shadow="sm" className={classes.paper} withBorder padding="lg">
+        <Paper className={classes.paper} withBorder padding="lg">
             <Grid className={classes.body}>
                 <Grid.Col sm={12}>
                     <Group>
@@ -44,7 +44,7 @@ function Client({ data, onDelete }) {
                 {data.defaultHourRate > 0 &&
                     <Grid.Col sm={12}>
                         <Group noWrap spacing="xs">
-                            <MdAttachMoney className={classes.icon} />
+                            <IoLogoUsd className={classes.icon} />
                             <Text>{data.defaultHourRate}&nbsp;Kč</Text>
                         </Group>
                     </Grid.Col>
@@ -52,7 +52,7 @@ function Client({ data, onDelete }) {
                 {data.email &&
                     <Grid.Col sm={12} md={6} className={classes.col}>
                         <Group noWrap spacing="xs">
-                            <MdMailOutline className={classes.icon} />
+                            <IoIosMail className={classes.icon} />
                             <Text>{data.email}</Text>
                         </Group>
                     </Grid.Col>
@@ -60,7 +60,7 @@ function Client({ data, onDelete }) {
                 {data.phone &&
                     <Grid.Col sm={12} md={6} className={classes.col}>
                         <Group noWrap spacing="xs">
-                            <MdOutlinePhone className={classes.icon} />
+                            <IoIosCall className={classes.icon} />
                             <Text>{data.phone}</Text>
                         </Group>
                     </Grid.Col>
@@ -68,7 +68,7 @@ function Client({ data, onDelete }) {
                 {(data.address && data.address.street) &&
                     <Grid.Col sm={12} className={classes.col}>
                         <Group noWrap spacing="xs">
-                            <MdLocationCity className={classes.icon} />
+                            <IoIosBusiness className={classes.icon} />
                             <Text>{Object.values(data.address).join(', ')}</Text>
                         </Group>
                     </Grid.Col>
