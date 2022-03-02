@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Divider, Group, Paper, Title } from '@mantine/core'
+import { Button, Group, Paper, Title } from '@mantine/core'
 import AppShell from '../components/AppShell'
 import { Outlet, Link } from 'react-router-dom'
 

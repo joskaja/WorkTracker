@@ -1,5 +1,5 @@
 import React from 'react'
-import { Paper, Group, Button, Text, Title, Box, Grid, createStyles, ColorSwatch } from '@mantine/core'
+import { Paper, Group, Button, Text, Grid, createStyles, ColorSwatch } from '@mantine/core'
 import { Link } from 'react-router-dom'
 import { IoLogoUsd, IoIosMail, IoIosCall, IoIosBusiness } from 'react-icons/io'
 

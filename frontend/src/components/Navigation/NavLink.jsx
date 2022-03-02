@@ -9,7 +9,6 @@ const useStyles = createStyles(theme => ({
     button: {
         position: 'relative',
         display: 'block',
-        padding: theme.spacing.sm,
         textDecoration: 'none !important',
         transition: 'background .3s',
         padding: '12px 12px 12px 24px',
@@ -55,7 +54,7 @@ function NavLink({ children, badge, icon, to }) {
             <UnstyledButton
                 component={RouterNavLink}
                 to={to}
-                className={({isActive}) => classes.button + (isActive ? ' active' : '')}
+                className={({ isActive }) => classes.button + (isActive ? ' active' : '')}
                 className={classes.button}
             >
                 <Group>
