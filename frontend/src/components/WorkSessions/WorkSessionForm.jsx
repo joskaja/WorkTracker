@@ -3,52 +3,68 @@ import React, { useState } from 'react'
 import ClientSelect from '../Clients/ClientSelect'
 import TimePicker from '../TimePicker/TimePicker';
 import { useForm } from '@mantine/hooks'
-
+import TimeRangePicker from '../TimePicker/TimeRangePicker';
+import ProjectSelect from '../Projects/ProjectSelect';
+import { useSelector } from 'react-redux';
+import moment from 'moment';
 
 function WorkSessionForm() {
+    const { date } = useSelector(state => state.date);
+
     const form = useForm({
         initialValues: {
-            startTime: '09:30',
-            endTime: '10:30'
+            startTime: moment().subtract(1, 'hour').startOf('hour').format('HH:mm'),
+            endTime: moment().startOf('hour').format('HH:mm'),
         }
     })
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+        const formData = {
+            ...form.values,
+            start: moment(`${date} ${form.values.startTime}`, 'DD.MM.YYYY HH:mm').toDate(),
+            end: moment(`${date} ${form.values.endTime}`, 'DD.MM.YYYY HH:mm').toDate()
+        };
+        console.log(formData);
+    }
+
     return (
         <Box>
             <Title order={4} mb="sm">Nový záznam</Title>
-            <Grid>
-                <Grid.Col sm={12} md={6} lg={3}>
-                    <ClientSelect />
-                </Grid.Col>
-                <Grid.Col sm={12} md={6} lg={3}>
-                    <ClientSelect />
-                </Grid.Col>
-                <Grid.Col sm={12} md={6} lg={3}>
-                    <Group style={{alignItems: 'center'}} grow>
-                        <TimePicker
-                            label="Začátek"
-                            time={form.values.startTime}
-                            onChange={(time) => form.setFieldValue('startTime', time)}
+            <form onSubmit={onSubmit}>
+                <Grid>
+                    <Grid.Col sm={12} md={6} lg={3}>
+                        <ProjectSelect
+                            {...form.getInputProps('project')}
+                            client={form.values.client}
+                            onChange={project => {
+                                form.setFieldValue('project', project?._id);
+                                form.setFieldValue('client', project?.client?._id);
+                            }}
                         />
-                        <Box style={{marginTop: 20, width: 20}}> - </Box>
-                        <TimePicker
-                            label="Konec"
-                            time={form.values.endTime}
-                            onChange={(time) => form.setFieldValue('endTime', time)}
+                    </Grid.Col>
+                    <Grid.Col sm={12} md={6} lg={3}>
+                        <ClientSelect
+                            {...form.getInputProps('client')}
+                            onChange={client => {
+                                form.setFieldValue('client', client?._id);
+                            }}
                         />
-                    </Group>
-                </Grid.Col>
-                <Grid.Col sm={12} md={6} lg={3}>
-                    <TextInput
-                        label="Odpracovaná doba"
-                        type="time"
-                    />
-                </Grid.Col>
-                <Grid.Col sm={12}>
-                    <Button>
-                        Uložit záznam
-                    </Button>
-                </Grid.Col>
-            </Grid>
+                    </Grid.Col>
+                    <Grid.Col sm={12} md={12} lg={6}>
+                        <TimeRangePicker
+                            startTime={form.values.startTime}
+                            endTime={form.values.endTime}
+                            setTime={form.setFieldValue}
+                        />
+                    </Grid.Col>
+                    <Grid.Col sm={12} align="center" justify="center">
+                        <Button type="submit">
+                            Uložit záznam
+                        </Button>
+                    </Grid.Col>
+                </Grid>
+            </form>
         </Box>
     )
 }

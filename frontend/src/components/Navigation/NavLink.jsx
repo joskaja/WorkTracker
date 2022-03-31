@@ -14,11 +14,11 @@ const useStyles = createStyles(theme => ({
         padding: '12px 12px 12px 24px',
         fontSize: theme.fontSizes.md,
         '&:hover': {
-            background: theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[1],
+            background: theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.indigo[0],
             color: theme.colors[theme.primaryColor],
         },
         '&.active': {
-            background: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
+            background: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.indigo[0],
             color: theme.colors[theme.primaryColor],
         },
         '&:after': {
@@ -39,6 +39,7 @@ const useStyles = createStyles(theme => ({
     },
     text: {
         fontSize: theme.fontSizes.sm,
+        fontWeight: 500,
         color: theme.colorScheme === 'dark' ? theme.colors.gray[5] : theme.colors.gray[9]
     },
     badge: {
@@ -54,8 +55,7 @@ function NavLink({ children, badge, icon, to }) {
             <UnstyledButton
                 component={RouterNavLink}
                 to={to}
-                className={({ isActive }) => classes.button + (isActive ? ' active' : '')}
-                className={classes.button}
+                className={[classes.button, ({ isActive }) =>  (isActive ? 'active' : '')]}
             >
                 <Group>
                     {icon}

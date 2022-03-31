@@ -12,7 +12,7 @@ function TimePicker({time, onChange, label}) {
         <Box style={{ position: 'relative' }}>
             <TimeInput
                 label={label}
-                value={moment(time, 'hh:mm').toDate()}
+                value={moment(time, 'HH:mm').toDate()}
                 onChange={(time) => onChange(moment(time).format('HH:mm'))}
                 icon={<IoTimeOutline />}
                 onFocus={() => setShowPicker(true)}
