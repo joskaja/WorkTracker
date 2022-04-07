@@ -33,7 +33,7 @@ function Client({ data, onDelete }) {
     const { classes } = useStyles();
 
     return (
-        <Paper className={classes.paper} withBorder padding="lg">
+        <Paper className={classes.paper} withBorder p="lg">
             <Grid className={classes.body}>
                 <Grid.Col sm={12}>
                     <Group>

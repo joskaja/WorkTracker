@@ -11,6 +11,7 @@ import Login from './pages/Login';
 import Projects from './pages/Projects';
 import Register from './pages/Register';
 import Reports from './pages/Reports';
+import Sessions from './pages/Sessions';
 
 function Router({ children }) {
     return (
@@ -27,6 +28,7 @@ function Router({ children }) {
                         <Route path="new" element={<ProjectForm/>} />
                         <Route path=":projectID" element={<ProjectForm />} />
                     </Route>
+                    <Route path="/session/:sessionID" element={<AuthRoute><Sessions/></AuthRoute>}/>
                     <Route path="/clients" element={<AuthRoute><Clients /></AuthRoute>} >
                         <Route index element={<ClientsList />} />
                         <Route path="new" element={<ClientForm />} />

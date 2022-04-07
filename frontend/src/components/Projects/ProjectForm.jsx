@@ -29,7 +29,6 @@ function ProjectForm() {
             setLoading(true);
             if (projectID) {
                 const project = await apiRequestService.get('/api/projects/' + projectID);
-                console.log(project);
                 form.setValues(project);
             }
             setLoading(false);
@@ -40,14 +39,12 @@ function ProjectForm() {
     const saveProject = (formData) => {
         setLoading(true);
         let request;
-        console.log(projectID, formData);
         if (projectID) {
             request = apiRequestService.put('/api/projects/' + projectID, formData);
         } else {
             request = apiRequestService.post('/api/projects', formData);
         }
         request.then((data) => {
-            console.log(data);
             onProjectSaved();
         }).catch(e => {
             notifications.showNotification({

@@ -5,6 +5,7 @@ import { NavLink as RouterNavLink } from 'react-router-dom'
 
 const useStyles = createStyles(theme => ({
     wrapper: {
+        borderRadius: 15
     },
     button: {
         position: 'relative',

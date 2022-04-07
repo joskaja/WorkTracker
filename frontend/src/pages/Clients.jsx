@@ -16,7 +16,7 @@ function Clients() {
                     ml="auto"
                 >Přidat nového zákazníka</Button>
             </Group>
-            <Paper shadow="sm" radius="md" padding="xl" style={{ position: 'relative', minHeight: '100%' }}>
+            <Paper style={{ position: 'relative', minHeight: '100%' }}>
                 <Outlet />
             </Paper>
         </AppShell>

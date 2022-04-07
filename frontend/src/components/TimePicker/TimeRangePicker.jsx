@@ -30,12 +30,12 @@ function TimeRangePicker({ startTime, endTime, setTime }) {
         let start = moment(startTime, 'HH:mm');
         let end = moment(time, 'HH:mm');
         if (end.diff(start) < 0) time = start.add(1, 'hours').format('HH:mm');
-        if (end.isAfter(start.endOf('day').subtract(1, 'hour'))) time = '23:59';
+        if (end.isAfter(start.endOf('day').subtract(1, 'minute'))) time = '23:59';
         setTime('endTime', time);
     }
 
     return (
-        <Group spacing="xs" style={{justifyContent: 'center'}} align="center">
+        <Group spacing="xs">
             <TimePicker
                 label="Začátek"
                 time={startTime}

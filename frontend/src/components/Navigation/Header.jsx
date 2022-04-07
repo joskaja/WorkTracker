@@ -8,7 +8,7 @@ import { IoLogOutOutline, IoPersonAddOutline, IoPersonOutline } from 'react-icon
 
 function Header(props) {
     const { user } = useSelector(state => state.auth);
-    const {withBurger, menuOpened, toggleMenu, ...headerProps} = props;
+    const { withBurger, menuOpened, toggleMenu, ...headerProps } = props;
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -30,8 +30,7 @@ function Header(props) {
                             />
                         </MediaQuery>
                     )}
-                    <Link to="/"><img src={logo} alt="WorkTracker" height={40} /></Link>
-                    <Title order={2}>WorkTracker</Title>
+                    <Title order={2} ml="sm"><Link to="/" style={{textDecoration: 'none', color: 'inherit'}}>WorkTracker</Link></Title>
                 </Group>
                 <Group ml="auto">
                     {user && user.id ?

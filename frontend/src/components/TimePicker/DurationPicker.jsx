@@ -19,7 +19,7 @@ function DurationPicker({ duration, onChange }) {
     const derivateDuration = (hours) => {
         let newDuration = moment.duration(duration);
         newDuration.add(hours, 'hours');
-        if(newDuration.asMinutes() < 1) {
+        if (newDuration.asMinutes() < 1) {
             newDuration = moment.duration(1, 'minute');
         };
         onChange(newDuration.asMilliseconds());
@@ -39,7 +39,7 @@ function DurationPicker({ duration, onChange }) {
                 label="Doba"
                 value={durationString}
                 onChange={(e) => setDurationString(e.target.value)}
-                style={{ maxWidth: 100 }}
+                sx={(theme) => ({ maxWidth: 100, input: { textAlign: 'center' } })}
                 onBlur={e => {
                     let val = e.target.value.replace(/\s+/g, '').split('h');
                     let hours = val[0];

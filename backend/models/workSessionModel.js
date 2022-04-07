@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const workSessionSchema = mongoose.Schema(
     {
-        name: {
+        description: {
             type: String,
             required: [true, 'Záznam musí mít název']
         },
@@ -13,14 +13,17 @@ const workSessionSchema = mongoose.Schema(
         },
         client: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Client',
-            required: [true, 'Záznam musí být přiřazen ke klientovi']
+            ref: 'Client'
         },
-        timeStart: {
+        project: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Project'
+        },
+        startTime: {
             type: Date,
             required: [true, 'Záznam musí mít čas začátku']
         },
-        timeEnd: {
+        endTime: {
             type: Date,
             required: [true, 'Záznam musí mít čas konce']
         }
@@ -29,5 +32,10 @@ const workSessionSchema = mongoose.Schema(
         timestamps: true
     }
 );
+
+workSessionSchema.virtual('duration').get(function () {
+    return Math.abs(this.endTime.getTime() - this.startTime.getTime()) / 3600000;
+});
+workSessionSchema.set('toJSON', { virtuals: true, getters: true });
 
 module.exports = mongoose.model('WorkSession', workSessionSchema);

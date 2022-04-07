@@ -34,7 +34,7 @@ function Project({ data, onDelete }) {
     const { classes } = useStyles();
 
     return (
-        <Paper className={classes.paper} withBorder padding="lg">
+        <Paper className={classes.paper} withBorder p="lg">
             <Grid className={classes.body}>
                 <Grid.Col sm={12}>
                     <Text size="xl" weight={500} component={Link} to={`/projects/${data._id}`}>{data.name}</Text>

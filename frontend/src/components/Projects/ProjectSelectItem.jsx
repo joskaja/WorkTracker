@@ -2,7 +2,7 @@ import { Box, ColorSwatch, Group, Text } from "@mantine/core";
 import { forwardRef } from "react";
 
 const ProjectSelectItem = forwardRef(
-    ({ name, hourRate, updateAt, createdAt, client, _id, ...others }, ref) => (
+    ({ name, hourRate, updatedAt, createdAt, client, _id, ...others }, ref) => (
         <Box ref={ref} value={_id} {...others}>
             <Group noWrap>
                 <div>

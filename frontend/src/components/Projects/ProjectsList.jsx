@@ -11,7 +11,6 @@ function ProjectsList() {
     const [loading, setLoading] = useState(true);
     useEffect(() => {
         apiRequestService.get('/api/projects').then(data => {
-            console.log(data);
             setProjects(data);
             setLoading(false);
         }).catch(e => {

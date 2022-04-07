@@ -24,16 +24,14 @@ function ClientForm() {
             zipCode: ''
         },
         validationRules: {
-            //name: (value) => value.length > 3,
+            name: (value) => value.length > 3,
             email: (value) => /^\S+@\S+$/.test(value),
         }
     });
 
     useEffect(() => {
-        console.log(clientID);
         if (clientID) {
             setLoading(true);
-            console.log('effect');
             apiRequestService.get('/api/clients/' + clientID).then(data => {
                 form.setValues({ ...data, ...data.address });
                 setLoading(false);
@@ -44,14 +42,12 @@ function ClientForm() {
     const saveClient = (formData) => {
         setLoading(true);
         let request;
-        console.log(clientID, formData);
         if (clientID) {
             request = apiRequestService.put('/api/clients/' + clientID, formData);
         } else {
             request = apiRequestService.post('/api/clients', formData);
         }
         request.then((data) => {
-            console.log(data);
             onClientSaved();
         }).catch(e => {
             notifications.showNotification({

@@ -7,11 +7,12 @@ const {
     updateWorkSession,
     deleteWorkSession
 } = require('../controllers/workSessionController');
+const protectRoute = require('../middleware/authMiddleware');
 
-router.get('/', getWorkSessions);
-router.post('/', createWorkSession);
-router.get('/:id', getWorkSession);
-router.put('/:id', updateWorkSession);
-router.delete('/:id', deleteWorkSession);
+router.get('/', protectRoute, getWorkSessions);
+router.post('/', protectRoute, createWorkSession);
+router.get('/:id', protectRoute, getWorkSession);
+router.put('/:id', protectRoute, updateWorkSession);
+router.delete('/:id', protectRoute, deleteWorkSession);
 
 module.exports = router

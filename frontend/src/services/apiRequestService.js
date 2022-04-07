@@ -13,7 +13,6 @@ const get = (url) => {
         ...commonOptions,
         method: 'GET'
     }
-    console.log(requestOptions);
     return fetch(url, requestOptions).then(handleResponse);
 }
 
@@ -44,7 +43,6 @@ const _delete = (url) => {
 }
 
 const handleResponse = (response) => {
-    console.log(response);
     return response.json().then(data => {
         if (!response.ok) {
             const error = (data && data.message) || response.statusText;

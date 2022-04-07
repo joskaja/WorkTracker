@@ -33,7 +33,12 @@ const createProject = asyncHandler(async (req, res) => {
 @route POST /api/work-sessions/:id
 **/
 const getProject = asyncHandler(async (req, res) => {
-    const project = await Project.findById(req.params.id)
+    const project = await Project.findById(req.params.id);
+    if (project.user.toString() !== req.user.id) {
+        res.status(401);
+        throw new Error('Uživatel nemá k této akci oprávnění');
+    }
+
     res.json(project)
 });
 

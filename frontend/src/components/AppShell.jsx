@@ -11,9 +11,9 @@ function AppShell({ children }) {
             fixed
             header={
                 <Header
-                    shadow="md"
+                    shadow="lg"
                     height={60}
-                    padding="xs"
+                    p="xs"
                     toggleMenu={setMenuOpened}
                     withBurger
                 />}

@@ -61,9 +61,9 @@ function Login() {
   const { email, password } = formData;
   return (
     <>
-      <Header height={60} padding="xs" />
+      <Header height={60} p="xs" />
       <Center style={{ minHeight: 'calc(100vh - 60px)' }}>
-        <Paper padding="lg" shadow="md" radius="md"
+        <Paper
           className={classes.paper}
         >
           <Group position="center">

@@ -21,7 +21,6 @@ function ClientsList() {
     const [loading, setLoading] = useState(true);
     useEffect(() => {
         apiRequestService.get('/api/clients').then(data => {
-            console.log(data);
             setClients(data);
             setLoading(false);
         });

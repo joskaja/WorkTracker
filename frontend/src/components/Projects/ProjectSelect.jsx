@@ -25,7 +25,7 @@ function ProjectSelect(props) {
 
     const quickCreate = (name) => {
         setLoading(true);
-        apiRequestService.post('/api/clients', { name, color: colors.randomColor() }).then(project => {
+        apiRequestService.post('/api/projects', { name }).then(project => {
             setProjects(projects => [...projects, { ...project, label: project.name, value: project._id }]);
             notifications.showNotification({
                 title: 'Úspěch',
@@ -34,7 +34,6 @@ function ProjectSelect(props) {
                 icon: <MdCheckCircle />
             });
             props?.form?.setFieldValue(props.name, project._id);
-            console.log(props?.form?.values);
             setLoading(false);
         }).catch(e => {
             notifications.showNotification({
@@ -55,7 +54,7 @@ function ProjectSelect(props) {
             placeholder="Vyberte projekt"
             nothingFound="Nikdo nebyl nalezen..."
             readOnly={loading}
-            data={props.client ? projects.filter(project => project?.client?._id === props.client) : projects}
+            data={props.client ? projects.filter(project => project?.client?._id === props.client || !project.client) : projects}
             itemComponent={ProjectSelectItem}
             searchable
             clearable

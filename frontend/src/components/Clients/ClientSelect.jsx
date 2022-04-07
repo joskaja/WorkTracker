@@ -31,7 +31,6 @@ function ClientSelect(props) {
                 icon: <MdCheckCircle />
             });
             props?.form?.setFieldValue(props.name, client._id);
-            console.log(props?.form?.values);
             setLoading(false);
         }).catch(e => {
             notifications.showNotification({
@@ -64,7 +63,6 @@ function ClientSelect(props) {
             {...props}
             onChange={(value) => {
                 let client = clients.filter(client => client._id === value)[0];
-                console.log(value, client);
                 return props.onChange(client)
             }}
         />

@@ -18,9 +18,6 @@ function Projects() {
                 </Button>
             </Group>
             <Paper
-                shadow="sm"
-                radius="md"
-                padding="xl"
                 style={{ position: 'relative', minHeight: '100%' }}
             >
                 <Outlet />

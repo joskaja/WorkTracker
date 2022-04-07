@@ -70,9 +70,9 @@ function Register() {
 
     return (
         <>
-            <Header height={60} padding="xs" />
+            <Header height={60} p="xs" />
             <Center style={{ minHeight: 'calc(100vh - 60px)' }}>
-                <Paper padding="lg" shadow="sm" radius="md"
+                <Paper
                     className={classes.paper}
                 >
                     <Group align="center" position="center">
