@@ -31,7 +31,7 @@ const createWorkSession = asyncHandler(async (req, res) => {
         res.status(400);
         throw new Error('Začátek nesmí být později než konec.');
     }
-    const overlaps = await getOverlappingWorkSessions(new Date(req.body.startTime), new Date(req.body.endTime));
+    const overlaps = await getOverlappingWorkSessions(req.user.id, new Date(req.body.startTime), new Date(req.body.endTime));
     console.log(overlaps);
     if (overlaps.length > 0) {
         res.status(400);
@@ -95,7 +95,7 @@ const updateWorkSession = asyncHandler(async (req, res) => {
         throw new Error('Uživatel nemá k této akci oprávnění');
     }
 
-    const overlaps = await getOverlappingWorkSessions(new Date(req.body.startTime), new Date(req.body.endTime));
+    const overlaps = await getOverlappingWorkSessions(req.user.id, new Date(req.body.startTime), new Date(req.body.endTime));
     console.log(overlaps);
     if (overlaps.length > 0 && !(overlaps.length === 1 && overlaps[0]._id.toString() === req.params.id)) {
         res.status(400);
@@ -131,10 +131,13 @@ const deleteWorkSession = asyncHandler(async (req, res) => {
     res.json({ message: `Záznam "${workSession.description}" byl úspěšně odstraněn.`, id: req.params.id })
 });
 
-const getOverlappingWorkSessions = (start, end) => {
+const getOverlappingWorkSessions = (user, start, end) => {
     start = new Date(start.getTime() + 1000);
     end = new Date(end.getTime() - 1000);
     return WorkSession.find({
+        $and: [
+            { user: user }
+        ],
         $or: [
             { startTime: { $lte: start }, endTime: { $gte: start } },
             { startTime: { $lte: end }, endTime: { $gte: end } },
