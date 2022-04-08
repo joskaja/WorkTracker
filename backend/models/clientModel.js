@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 const mongoose = require('mongoose');
+const Project = require('./projectModel');
 
 const clientSchema = mongoose.Schema(
     {
@@ -34,5 +35,10 @@ const clientSchema = mongoose.Schema(
         timestamps: true
     }
 );
+
+clientSchema.pre('remove', function (next) {
+    Project.remove({ client: this._id }).exec();
+    next();
+});
 
 module.exports = mongoose.model('Client', clientSchema);

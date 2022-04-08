@@ -6,6 +6,7 @@ import { useNotifications } from '@mantine/notifications';
 import { useNavigate } from 'react-router-dom';
 import { register } from '../features/Auth/authSlice';
 import Header from '../components/Navigation/Header';
+import { apiRequestService } from '../services/apiRequestService';
 
 const useStyles = createStyles(theme => ({
     paper: {

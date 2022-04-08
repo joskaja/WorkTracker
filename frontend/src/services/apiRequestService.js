@@ -1,16 +1,18 @@
-const user = JSON.parse(localStorage.getItem('user'));
 
-const commonOptions = {
-    headers: {
-        'Content-Type': 'application/json',
-        'Authorization': user?.token ? 'Bearer: ' + user.token : '',
-    },
-};
-
+const getCommonOptions = () => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    const commonOptions = {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': user?.token ? 'Bearer: ' + user.token : '',
+        },
+    };
+    return commonOptions;
+}
 
 const get = (url) => {
     const requestOptions = {
-        ...commonOptions,
+        ...getCommonOptions(),
         method: 'GET'
     }
     return fetch(url, requestOptions).then(handleResponse);
@@ -18,7 +20,7 @@ const get = (url) => {
 
 const post = (url, data) => {
     const requestOptions = {
-        ...commonOptions,
+        ...getCommonOptions(),
         method: 'POST',
         body: JSON.stringify(data)
     }
@@ -27,7 +29,7 @@ const post = (url, data) => {
 
 const put = (url, data) => {
     const requestOptions = {
-        ...commonOptions,
+        ...getCommonOptions(),
         method: 'PUT',
         body: JSON.stringify(data)
     }
@@ -36,13 +38,17 @@ const put = (url, data) => {
 
 const _delete = (url) => {
     const requestOptions = {
-        ...commonOptions,
+        ...getCommonOptions(),
         method: 'DELETE'
     }
     return fetch(url, requestOptions).then(handleResponse);
 }
 
 const handleResponse = (response) => {
+    if (response.status > 499) {
+        localStorage.removeItem('user');
+        window.location = "/";
+    }
     return response.json().then(data => {
         if (!response.ok) {
             const error = (data && data.message) || response.statusText;
@@ -53,7 +59,6 @@ const handleResponse = (response) => {
 }
 
 export const apiRequestService = {
-    commonOptions,
     get,
     post,
     put,

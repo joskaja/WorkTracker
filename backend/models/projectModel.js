@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const WorkSession = require('./workSessionModel');
 
 const projectSchema = mongoose.Schema(
     {
@@ -23,5 +24,10 @@ const projectSchema = mongoose.Schema(
         timestamps: true
     }
 );
+
+projectSchema.pre('remove', function (next) {
+    WorkSession.remove({ project: this._id }).exec();
+    next();
+});
 
 module.exports = mongoose.model('Project', projectSchema);

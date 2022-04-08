@@ -10,11 +10,9 @@ import ProjectsShare from '../components/Reports/ProjectsShare'
 import ProductivityReport from '../components/Reports/ProductivityReport'
 import Totals from '../components/Reports/Totals'
 import DateRangePicker from '../components/DatePicker/DateRangePicker';
-import { useNavigate } from 'react-router-dom';
 
 
 function Reports() {
-    const navigate = useNavigate();
     const [workSessions, setWorkSessions] = useState([]);
     const [loading, setLoading] = useState(false);
     const [dateRange, setDateRange] = useState([
