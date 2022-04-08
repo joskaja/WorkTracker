@@ -9,7 +9,7 @@ const ClientSelectItem = forwardRef(
                 <div>
                     <Text>{name}</Text>
                     <Text size="xs" color="dimmed">
-                        {address && Object.values(address).join(', ')}
+                        {(address && address.street) && Object.values(address).join(', ')}
                     </Text>
                 </div>
             </Group>

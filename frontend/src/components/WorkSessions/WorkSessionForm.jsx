@@ -78,6 +78,7 @@ function WorkSessionForm({ sessionId, ...props }) {
                 icon: <IoCheckmarkCircleSharp />
             });
         }
+        console.log(status);
         if (status === 'update_success') {
             form.reset();
             notifications.showNotification({
@@ -118,7 +119,6 @@ function WorkSessionForm({ sessionId, ...props }) {
 
     return (
         <Box>
-            <LoadingOverlay visible={loading} />
             <form onSubmit={form.onSubmit(saveWorkSession)}>
                 <Grid>
                     <Grid.Col sm={12} md={6} >
@@ -161,6 +161,7 @@ function WorkSessionForm({ sessionId, ...props }) {
                     </Grid.Col>
                     <Grid.Col sm={12} align="center" justify="center">
                         <Button
+                            loading={loading}
                             leftIcon={<IoSave />}
                             type="submit"
                         >
