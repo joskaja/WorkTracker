@@ -16,3 +16,9 @@ Installation
 To start project run from root directory:
 `npm run server`
 `npm run client`
+
+
+![WorkTracker - Dashboard](docs/Dashboard.png)
+![WorkTracker - Reports](docs/Reports.png)
+![WorkTracker - Clients](docs/Clients.png)
+![WorkTracker - Client](docs/Client.png)
