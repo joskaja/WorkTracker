@@ -8,21 +8,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import { decrementDate, incrementDate, loadWorkSessions, setDate } from '../../features/WorkSessions/workSessionsSlice';
 
 
-function DatePicker() {
-    const { date } = useSelector(state => state.workSessions);
-    const dispatch = useDispatch();
+function DatePicker({value, onChange}) {
+  /*   const { date } = useSelector(state => state.workSessions);
+    const dispatch = useDispatch(); */
     const theme = useMantineTheme();
 
     const today = moment().startOf('day').toDate();
 
-    useEffect(() => {
-        dispatch(loadWorkSessions());
-    }, [date]);
-
+    const derivateDate = (days) => {
+        const date = moment(value).add(days, 'days');
+        onChange(date.toDate());
+    }
 
     return (
         <Group>
-            <ActionIcon variant="hover" color="primary" onClick={() => dispatch(decrementDate())}>
+            <ActionIcon variant="hover" color="primary" onClick={() => derivateDate(-1)}>
                 <IoChevronBack />
             </ActionIcon>
             <Box position="center" >
@@ -30,9 +30,9 @@ function DatePicker() {
                     locale="cs"
                     variant="unstyled"
                     inputFormat="DD. MMMM YYYY"
-                    value={moment(date, 'DD.MM.YYYY').toDate()}
-                    onChange={(val) => dispatch(setDate(moment(val).format('DD.MM.YYYY')))}
-                    onDoubleClick={() => dispatch(setDate(moment().format('DD.MM.YYYY')))}
+                    value={value}
+                    onChange={onChange}
+                    onDoubleClick={() => onChange(moment().startOf('day').toDate())}
                     firstDayOfWeek="monday"
                     clearable={false}
                     dayStyle={(date) => date.getTime() === today.getTime()
@@ -49,7 +49,7 @@ function DatePicker() {
                     })}
                 />
             </Box>
-            <ActionIcon variant="hover" color="primary" onClick={() => dispatch(incrementDate())}>
+            <ActionIcon variant="hover" color="primary" onClick={() => derivateDate(1)}>
                 <IoChevronForward />
             </ActionIcon>
         </Group>

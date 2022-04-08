@@ -1,4 +1,4 @@
-import { Box, Button, Grid, LoadingOverlay, TextInput } from '@mantine/core'
+import { Box, Button, Grid, LoadingOverlay, Textarea, TextInput } from '@mantine/core'
 import React, { useEffect, useState } from 'react'
 import ClientSelect from '../Clients/ClientSelect'
 import { useForm } from '@mantine/form'
@@ -14,7 +14,7 @@ import { createWorkSession, updateWorkSession, resetStatus, setDate } from '../.
 import { useFocus } from '../../utils/hooks';
 
 
-function WorkSessionForm({ sessionId, ...props }) {
+function WorkSessionForm({ sessionId, editWorkSession }) {
     const dispatch = useDispatch();
     const notifications = useNotifications();
     const [scroll, scrollTo] = useWindowScroll();
@@ -112,6 +112,7 @@ function WorkSessionForm({ sessionId, ...props }) {
         if (sessionId) {
             formData.id = sessionId;
             dispatch(updateWorkSession(formData));
+            editWorkSession('');
         } else {
             dispatch(createWorkSession(formData));
         }
@@ -123,11 +124,10 @@ function WorkSessionForm({ sessionId, ...props }) {
                 <Grid>
                     <Grid.Col sm={12} md={6} >
                         <TextInput
-                            name="description"
-                            label="Popisek"
-                            placeholder="Popisek"
-                            ref={descriptionInputRef}
                             {...form.getInputProps('description')}
+                            placeholder="Popisek"
+                            label="Popisek"
+                            ref={descriptionInputRef}
                         />
                     </Grid.Col>
                     <Grid.Col sm={12} md={6}>

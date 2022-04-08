@@ -12,6 +12,7 @@ function DurationPicker({ duration, onChange }) {
     const [durationString, setDurationString] = useState(createDurationString(duration));
 
     useEffect(() => {
+        console.log(duration);
         setDurationString(createDurationString(duration));
     }, [duration])
 
@@ -47,11 +48,12 @@ function DurationPicker({ duration, onChange }) {
 
                     if (isNaN(hours)) hours = 1;
                     if (isNaN(minutes)) minutes = 0;
-
-                    onChange(moment.duration({
+                    let mils = moment.duration({
                         hours,
                         minutes
-                    }).asMilliseconds());
+                    }).asMilliseconds();
+                    setDurationString(createDurationString(mils));
+                    onChange(mils);
                 }}
             />
             <ActionIcon

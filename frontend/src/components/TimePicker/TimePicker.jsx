@@ -14,9 +14,9 @@ const useStyles = createStyles(theme => ({
         '--clock-bg': theme.colorScheme === 'dark' ? theme.colors.dark[6] : '',
         '--numbers-text-color': theme.colorScheme === 'dark' ? theme.colors.gray[0] : theme.colors.dark[3],
         '--top-selected-color': theme.colors[theme.primaryColor][5],
-        '--hand-circle-inner':  theme.colorScheme === 'dark' ? theme.colors[theme.primaryColor][7] : theme.colors[theme.primaryColor][1],
+        '--hand-circle-inner': theme.colorScheme === 'dark' ? theme.colors[theme.primaryColor][7] : theme.colors[theme.primaryColor][1],
         '--hand-circle-outer': theme.colorScheme === 'dark' ? theme.colors[theme.primaryColor][7] : theme.colors[theme.primaryColor][1],
-        '--hand-line-color':  theme.colorScheme === 'dark' ? theme.colors[theme.primaryColor][7] : theme.colors[theme.primaryColor][1],
+        '--hand-line-color': theme.colorScheme === 'dark' ? theme.colors[theme.primaryColor][7] : theme.colors[theme.primaryColor][1],
     }
 }))
 
@@ -33,7 +33,6 @@ function TimePicker({ time, onChange, label }) {
                 icon={<IoTimeOutline />}
                 onFocus={() => setShowPicker(true)}
                 onBlur={() => setShowPicker(false)}
-
             />
             {showPicker &&
                 <Box className={classes.timeKeeper} style={{ position: 'absolute', zIndex: 100 }}>
