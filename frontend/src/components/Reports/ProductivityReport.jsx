@@ -1,6 +1,6 @@
 import React from 'react'
 import moment from 'moment';
-import { Box, useMantineTheme } from '@mantine/core';
+import { Box, Skeleton, useMantineTheme } from '@mantine/core';
 import { Bar, BarChart, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 const prepareChartData = (range) => {
     const chartData = {};
@@ -16,7 +16,7 @@ const prepareChartData = (range) => {
     return chartData;
 }
 
-function ProductivityReport({ range, data, ...props }) {
+function ProductivityReport({ range, data, loading }) {
     const theme = useMantineTheme();
     let chartData = {};
     if (range[0] && range[1] && data) {
@@ -31,7 +31,7 @@ function ProductivityReport({ range, data, ...props }) {
     chartData = Object.values(chartData);
     return (
         <Box style={{ minHeight: 400, width: '99%', overflow: 'hidden' }}>
-            {chartData.length > 0 ?
+            {(chartData.length > 0 && !loading) &&
                 <ResponsiveContainer width="100%" height={400}>
                     <BarChart data={chartData} width={500} height={400}>
                         <Tooltip />
@@ -41,9 +41,9 @@ function ProductivityReport({ range, data, ...props }) {
                         <Bar dataKey="time" name="Počet hodin" fill={theme.colors[theme.primaryColor][6]} />
                     </BarChart>
                 </ResponsiveContainer>
-                :
-                <Box>Žádná data</Box>
             }
+            {(chartData.length < 1 && !loading) && <Box>Žádná data</Box>}
+            {loading && <Skeleton width="100%" height={400} radius="sm" />}
         </Box>
     )
 }

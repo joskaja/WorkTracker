@@ -22,7 +22,7 @@ function AppShell({ children }) {
                     hidden={!menuOpened}
                     width={{ sm: 300, lg: 250 }}
                 />}
-            styles={(theme) => ({
+            sx={(theme) => ({
                 main: { backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0] },
             })}
         >

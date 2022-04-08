@@ -38,7 +38,7 @@ function Reports() {
 
     return (
         <AppShell>
-            <LoadingOverlay visible={loading} />
+           
             <Group mb="sm" mx="lg">
                 <Title order={2}>Výkazy</Title>
                 <Box ml="auto">
@@ -60,7 +60,7 @@ function Reports() {
                 <Grid.Col sm={12} md={6}>
                     <Title mb="sm" mx="lg" order={4}>Podíl zákazníků</Title>
                     <Paper>
-                        <ClientsShare data={loading ? [] : workSessions} />
+                        <ClientsShare data={loading ? [] : workSessions} loading={loading}/>
                     </Paper>
                 </Grid.Col>
                 <Grid.Col sm={12} md={6}>

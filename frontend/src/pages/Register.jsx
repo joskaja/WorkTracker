@@ -6,14 +6,18 @@ import { useNotifications } from '@mantine/notifications';
 import { useNavigate } from 'react-router-dom';
 import { register } from '../features/Auth/authSlice';
 import Header from '../components/Navigation/Header';
-import { apiRequestService } from '../services/apiRequestService';
 
 const useStyles = createStyles(theme => ({
+    wrapper: {
+      minHeight: 'calc(100vh - 60px)',
+      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0],
+      flexDirection: 'column'
+    },
     paper: {
-        maxWidth: theme.breakpoints.xs,
-        width: '100%'
+      maxWidth: theme.breakpoints.xs,
+      width: '100%'
     }
-}));
+  }));
 function Register() {
     const [errorMessage, setErrorMessage] = useState('');
     const [formData, setFormData] = useState({
@@ -72,13 +76,14 @@ function Register() {
     return (
         <>
             <Header height={60} p="xs" />
-            <Center style={{ minHeight: 'calc(100vh - 60px)' }}>
+            <Center className={classes.wrapper}>
+                <Title mb="lg">WorkTracker</Title>
                 <Paper
                     className={classes.paper}
                 >
                     <Group align="center" position="center">
                         <MdPersonAddAlt size={50} color={theme.colors[theme.primaryColor][4]} />
-                        <Title>Vytvořit účet</Title>
+                        <Title order={2}>Vytvořit účet</Title>
                     </Group>
                     {(errorMessage.length > 0) && (
                         <Alert icon={<MdCancel size={16} />} title="Chyba" color="red" my="md">
