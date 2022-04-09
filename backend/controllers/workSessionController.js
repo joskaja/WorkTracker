@@ -103,8 +103,8 @@ const updateWorkSession = asyncHandler(async (req, res) => {
     }
 
     workSession.description = req.body.description || workSession.description;
-    workSession.project = req.body.project;
-    workSession.client = req.body.client;
+    workSession.project = req.body.project || null;
+    workSession.client = req.body.client || null;
     workSession.startTime = req.body.startTime;
     workSession.endTime = req.body.endTime;
 

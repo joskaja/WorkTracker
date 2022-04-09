@@ -58,7 +58,7 @@ const updateProject = asyncHandler(async (req, res) => {
     }
     project.name = req.body.name || project.name;
     project.hourRate = req.body.hourRate;
-    project.client = req.body.client;
+    project.client = req.body.client || null;
 
     await project.save();
     res.json(project)
