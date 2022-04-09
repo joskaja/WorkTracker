@@ -18,6 +18,8 @@ To start project run from root directory:
 
 Screenshots
 ---------
+![WorkTracker - Landing](docs/Landing.png)
+
 ![WorkTracker - Dashboard](docs/Dashboard.png)
 
 ![WorkTracker - Reports](docs/Reports.png)
