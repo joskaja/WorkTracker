@@ -1,18 +1,19 @@
 import React, { useMemo } from 'react'
-import { ResponsiveContainer, PieChart, Pie, Cell, Legend, Tooltip, LabelList } from 'recharts';
+import { ResponsiveContainer, PieChart, Pie, Cell, Legend, Tooltip } from 'recharts';
 import { colors } from '../../utils/colors'
 import { Box, Skeleton } from '@mantine/core';
 const countChartData = (data) => {
     const chartData = {};
     data.forEach((session) => {
-        if (!chartData[session.project._id]) {
-            chartData[session.project._id] = {
+        const project = session.project ? session.project : { _id: 'other', name: 'Nezařazeno' }
+        if (!chartData[project._id]) {
+            chartData[project._id] = {
                 totalHours: 0,
-                projectName: session.project.name,
+                projectName: project.name,
                 color: colors.randomColor()
             }
         }
-        chartData[session.project._id].totalHours += session.duration || 0;
+        chartData[project._id].totalHours += session.duration || 0;
     });
 
     return Object.values(chartData);
