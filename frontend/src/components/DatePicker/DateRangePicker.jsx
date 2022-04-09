@@ -15,7 +15,7 @@ function DateRangePicker({ dateRange, setDateRange }) {
         setDateRange([start.toDate(), end.toDate()]);
     }
     return (
-        <Group>
+        <Group spacing="xs">
             <ActionIcon variant="hover" color="primary" onClick={() => derivateRange(-1)}>
                 <IoChevronBack />
             </ActionIcon>

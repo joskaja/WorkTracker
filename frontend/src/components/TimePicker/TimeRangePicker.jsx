@@ -35,7 +35,7 @@ function TimeRangePicker({ startTime, endTime, setTime }) {
     }
 
     return (
-        <Group spacing="xs">
+        <Group spacing="xs" position='center'>
             <TimePicker
                 label="Začátek"
                 time={startTime}

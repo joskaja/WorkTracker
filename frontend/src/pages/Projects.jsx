@@ -1,22 +1,22 @@
 import React from 'react'
-import { Paper, Divider, Title, Group, Button } from '@mantine/core'
+import { Paper, Title, Button } from '@mantine/core'
 import AppShell from '../components/AppShell'
 import { Outlet, Link } from 'react-router-dom'
+import PageHeader from '../components/PageHeader'
 
 function Projects() {
     return (
         <AppShell>
-            <Group mb="sm" mx="lg">
+            <PageHeader>
                 <Title order={2}>Moje projekty</Title>
                 <Button
                     component={Link}
                     to="/projects/new"
-                    ml="auto"
                     variant="subtle"
                 >
                     Přidat nový projekt
                 </Button>
-            </Group>
+            </PageHeader>
             <Paper
                 style={{ position: 'relative', minHeight: '100%' }}
             >

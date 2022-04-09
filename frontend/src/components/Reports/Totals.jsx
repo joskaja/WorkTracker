@@ -8,6 +8,14 @@ const useStyles = createStyles((theme) => ({
         borderRight: '1px solid ' + (theme.colorScheme === 'dark' ? theme.colors.gray[1] : theme.colors.gray[4]),
         '&:last-of-type': {
             borderRight: 'none'
+        },
+        [`@media screen and (max-width: ${theme.breakpoints.md}px)`]: {
+            '&:nth-child(2n)': {
+                borderRight: 'none'
+            },
+        },
+        [`@media screen and (max-width: ${theme.breakpoints.sm}px)`]: {
+            borderRight: 'none'
         }
     },
     title: {
@@ -29,8 +37,8 @@ function Totals({ data }) {
     let clients = new Set();
     data.forEach(session => {
         totalHours += session.duration;
-        if(session.project) projects.add(session.project._id);
-        if(session.client) clients.add(session.client._id);
+        if (session.project) projects.add(session.project._id);
+        if (session.client) clients.add(session.client._id);
         if (session.project.hourRate) {
             totalAmount += (session.duration * session.project.hourRate);
         }

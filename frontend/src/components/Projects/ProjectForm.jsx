@@ -86,14 +86,13 @@ function ProjectForm() {
                             name="name"
                             label="Název"
                             placeholder="Název projektu"
-                            autoComplete={false}
+                            autoComplete="disabled"
                             {...form.getInputProps('name')}
                         />
                     </Grid.Col>
                     <Grid.Col sm={12} md={6}>
                         <ClientSelect
                             value={form.values.client}
-                            autoComplete={false}
                             name="client"
                             form={form}
                             onChange={(client) => {

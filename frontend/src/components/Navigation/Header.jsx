@@ -1,22 +1,13 @@
 import React from 'react'
-import { Header as MantineHeader, Group, Burger, Title, Button, MediaQuery } from '@mantine/core';
-import { Link, useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { logout, reset } from '../../features/Auth/authSlice';
-import logo from '../../resources/img/logo.png';
-import { IoLogOutOutline, IoPersonAddOutline, IoPersonOutline } from 'react-icons/io5';
+import { Header as MantineHeader, Group, Burger, Button, MediaQuery } from '@mantine/core';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { IoPersonAddOutline, IoPersonOutline } from 'react-icons/io5';
+import Logo from './Logo';
 
 function Header(props) {
     const { user } = useSelector(state => state.auth);
     const { withBurger, menuOpened, toggleMenu, ...headerProps } = props;
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
-
-    const onLogout = () => {
-        dispatch(logout());
-        dispatch(reset());
-        navigate('/login', { replace: true });
-    }
 
     return (
         <MantineHeader {...headerProps}>
@@ -30,22 +21,10 @@ function Header(props) {
                             />
                         </MediaQuery>
                     )}
-                    <Title order={2} ml="sm"><Link to="/" style={{textDecoration: 'none', color: 'inherit'}}>WorkTracker</Link></Title>
+                    <Logo />
                 </Group>
                 <Group ml="auto">
-                    {user && user.id ?
-                        (
-                            <>
-                                <Button
-                                    variant="subtle"
-                                    onClick={onLogout}
-                                    leftIcon={<IoLogOutOutline size={18} />}
-                                >
-                                    Odhlásit se
-                                </Button>
-                            </>
-                        )
-                        :
+                    {(!user) &&
                         (
                             <>
                                 <Button

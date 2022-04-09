@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { Box, Grid, Group, LoadingOverlay, Paper, Title } from '@mantine/core'
+import { Box, Grid, Paper, Title } from '@mantine/core'
 import AppShell from '../components/AppShell'
-import { IoCalendar } from 'react-icons/io5'
 import moment from 'moment';
 import WorkSessionList from '../components/WorkSessions/WorkSessionList'
 import { apiRequestService } from '../services/apiRequestService'
@@ -10,6 +9,7 @@ import ProjectsShare from '../components/Reports/ProjectsShare'
 import ProductivityReport from '../components/Reports/ProductivityReport'
 import Totals from '../components/Reports/Totals'
 import DateRangePicker from '../components/DatePicker/DateRangePicker';
+import PageHeader from '../components/PageHeader';
 
 
 function Reports() {
@@ -38,13 +38,13 @@ function Reports() {
 
     return (
         <AppShell>
-           
-            <Group mb="sm" mx="lg">
+
+            <PageHeader>
                 <Title order={2}>Výkazy</Title>
-                <Box ml="auto">
+                <Box>
                     <DateRangePicker dateRange={dateRange} setDateRange={setDateRange} />
                 </Box>
-            </Group>
+            </PageHeader>
             <Grid gutter="xl">
                 <Grid.Col sm={12}>
                     <Paper>
@@ -60,7 +60,7 @@ function Reports() {
                 <Grid.Col sm={12} md={6}>
                     <Title mb="sm" mx="lg" order={4}>Podíl zákazníků</Title>
                     <Paper>
-                        <ClientsShare data={loading ? [] : workSessions} loading={loading}/>
+                        <ClientsShare data={loading ? [] : workSessions} loading={loading} />
                     </Paper>
                 </Grid.Col>
                 <Grid.Col sm={12} md={6}>

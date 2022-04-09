@@ -1,4 +1,4 @@
-import { Box, Group, Paper, Title } from '@mantine/core'
+import { Box, Paper, Title } from '@mantine/core'
 import React, { useEffect, useState } from 'react'
 import AppShell from '../components/AppShell'
 import WorkSessionForm from '../components/WorkSessions/WorkSessionForm'
@@ -9,6 +9,7 @@ import { loadWorkSessions, setDate } from '../features/WorkSessions/workSessions
 import { useNotifications } from '@mantine/notifications';
 import { IoCloseCircleSharp } from 'react-icons/io5';
 import moment from 'moment';
+import PageHeader from '../components/PageHeader';
 
 function Dashboard() {
     const dispatch = useDispatch();
@@ -33,9 +34,9 @@ function Dashboard() {
 
     return (
         <AppShell>
-            <Group mb="sm" mx="lg">
+            <PageHeader>
                 <Title order={2}>Dashboard</Title>
-                <Box ml="auto">
+                <Box>
                     <DatePicker
                         value={moment(date, 'DD.MM.YYYY').toDate()}
                         onChange={(value) => {
@@ -44,7 +45,7 @@ function Dashboard() {
                         }}
                     />
                 </Box>
-            </Group>
+            </PageHeader>
             <Title mb="sm" mx="lg" order={4}>Nový záznam</Title>
             <Paper mb="xl">
                 <WorkSessionForm sessionId={workSessionId} editWorkSession={setWorkSessionId} />

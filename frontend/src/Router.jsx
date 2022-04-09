@@ -7,6 +7,7 @@ import ProjectForm from './components/Projects/ProjectForm';
 import ProjectsList from './components/Projects/ProjectsList';
 import Clients from './pages/Clients';
 import Dashboard from './pages/Dashboard';
+import Landing from './pages/Landing';
 import Login from './pages/Login';
 import Projects from './pages/Projects';
 import Register from './pages/Register';
@@ -21,7 +22,8 @@ function Router({ children }) {
                 <Routes>
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
-                    <Route path="/" element={<AuthRoute><Dashboard /></AuthRoute>} />
+                    <Route path="/" element={<Landing />} />
+                    <Route path="/dashboard" element={<AuthRoute><Dashboard /></AuthRoute>} />
                     <Route path="/reports" element={<AuthRoute><Reports /></AuthRoute>} />
                     <Route path="/projects" element={<AuthRoute><Projects /></AuthRoute>}>
                         <Route index element={<ProjectsList />} />
