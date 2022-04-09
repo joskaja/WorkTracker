@@ -18,12 +18,30 @@ To start project run from root directory:
 
 Screenshots
 ---------
-![WorkTracker - Landing](docs/Landing.png)
+<table>
+  <tr>
+    <td>
+      <img src="docs/Landing.png"/>
+    </td>
+    <td>
+      <img src="docs/Dashboard.png"/>
+    </td>
+  </tr>
+   <tr>
+    <td>
+      <img src="docs/Reports.png"/>
+    </td>
+    <td>
+      <img src="docs/Clients.png"/>
+    </td>
+  </tr>
+     <tr>
+    <td>
+      <img src="docs/Client.png"/>
+    </td>
+    <td>
+        &nbsp;
+    </td>
+  </tr>
+</table>
 
-![WorkTracker - Dashboard](docs/Dashboard.png)
-
-![WorkTracker - Reports](docs/Reports.png)
-
-![WorkTracker - Clients](docs/Clients.png)
-
-![WorkTracker - Client](docs/Client.png)
