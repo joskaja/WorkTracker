@@ -1,5 +1,5 @@
 import React from 'react';
-import { MantineProvider, useMantineTheme } from '@mantine/core';
+import { MantineProvider } from '@mantine/core';
 import { NotificationsProvider } from '@mantine/notifications';
 import { useColorScheme } from '@mantine/hooks';
 import Router from './Router';
