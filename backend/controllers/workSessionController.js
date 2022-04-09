@@ -12,6 +12,8 @@ const getWorkSessions = asyncHandler(async (req, res) => {
 
     if (req.query.startTime) filters.startTime = { $gte: new Date(parseInt(req.query.startTime)) };
     if (req.query.endTime) filters.endTime = { $lte: new Date(parseInt(req.query.endTime)) };
+    if (req.query.client) filters.client = req.query.client;
+    if (req.query.project) filters.project = req.query.project;
 
     const workSessions = await WorkSession.find(filters).sort({ endTime: -1 }).populate(['client', 'project']);
     res.json(workSessions);
