@@ -1,5 +1,6 @@
 const asyncHandler = require('express-async-handler');
 const Project = require('../models/projectModel');
+
 /**
 @desc Get projects
 @route GET /api/work-sessions
@@ -11,7 +12,7 @@ const getProjects = asyncHandler(async (req, res) => {
 
 /**
 @desc Create projects
-@route POST /api/work-sessions
+@route POST /api/projects
 **/
 const createProject = asyncHandler(async (req, res) => {
     if (!req.body.name) {
@@ -30,21 +31,20 @@ const createProject = asyncHandler(async (req, res) => {
 
 /**
 @desc Get one project
-@route POST /api/work-sessions/:id
+@route POST /api/projects/:id
 **/
 const getProject = asyncHandler(async (req, res) => {
-    const project = await Project.findById(req.params.id);
-    if (project.user.toString() !== req.user.id) {
-        res.status(401);
-        throw new Error('Uživatel nemá k této akci oprávnění');
-    }
+    const project = await Project.findOne({
+        _id: req.params.id,
+        user: req.user.id
+    });
 
     res.json(project)
 });
 
 /**
 @desc Update one project
-@route PUT /api/work-sessions/:id
+@route PUT /api/projects/:id
 **/
 const updateProject = asyncHandler(async (req, res) => {
     const project = await Project.findById(req.params.id);

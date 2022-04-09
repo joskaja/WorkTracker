@@ -41,7 +41,10 @@ const createClient = asyncHandler(async (req, res) => {
 @route POST /api/work-sessions/:id
 **/
 const getClient = asyncHandler(async (req, res) => {
-    const client = await Client.findById(req.params.id)
+    const client = await Client.findOne({
+        _id: req.params.id,
+        user: req.user.id
+    })
     res.json(client)
 });
 
@@ -80,14 +83,14 @@ const deleteClient = asyncHandler(async (req, res) => {
     const client = await Client.findById(req.params.id);
     if (!client) {
         res.status(404);
-        throw new Error('Client nebyl nalezen');
+        throw new Error('Zákazník nebyl nalezen');
     }
     if (client.user.toString() !== req.user.id) {
         res.status(401);
         throw new Error('Uživatel nemá k této akci oprávnění');
     }
     await client.remove();
-    res.json({ message: `DELETE client ID: ${req.params.id}` })
+    res.json({ message: `Zákazník "${client.name}" byl odstraněn.` })
 });
 
 module.exports = {

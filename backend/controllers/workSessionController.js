@@ -65,7 +65,6 @@ const createWorkSession = asyncHandler(async (req, res) => {
 **/
 const getWorkSession = asyncHandler(async (req, res) => {
     const workSession = await WorkSession.findById(req.params.id)
-    console.log(workSession);
     if (workSession.user.toString() !== req.user.id) {
         res.status(401);
         throw new Error('Uživatel nemá k této akci oprávnění');
