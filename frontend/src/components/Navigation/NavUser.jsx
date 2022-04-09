@@ -3,7 +3,7 @@ import { UnstyledButton, Group, Avatar, Box, Text, Menu } from '@mantine/core'
 import { useDispatch, useSelector } from 'react-redux'
 import { IoLogOutOutline, IoSettingsOutline } from 'react-icons/io5'
 import { logout, reset } from '../../features/Auth/authSlice';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 function NavUser() {
     const { user } = useSelector(state => state.auth);
@@ -32,6 +32,7 @@ function NavUser() {
                     }>
                         <Menu.Label>Uživatel</Menu.Label>
                         <Menu.Item
+                            component={Link} to="/account/password"
                             icon={<IoSettingsOutline size={14} />}
                         >
                             Změna hesla

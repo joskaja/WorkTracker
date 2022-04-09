@@ -1,10 +1,12 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import PasswordChangeForm from './components/Account/PasswordChangeForm';
 import AuthRoute from './components/AuthRoute';
 import ClientForm from './components/Clients/ClientForm';
 import ClientsList from './components/Clients/ClientsList';
 import ProjectForm from './components/Projects/ProjectForm';
 import ProjectsList from './components/Projects/ProjectsList';
+import Account from './pages/Account';
 import Clients from './pages/Clients';
 import Dashboard from './pages/Dashboard';
 import Landing from './pages/Landing';
@@ -35,6 +37,9 @@ function Router({ children }) {
                         <Route index element={<ClientsList />} />
                         <Route path="new" element={<ClientForm />} />
                         <Route path=":clientID" element={<ClientForm />} />
+                    </Route>
+                    <Route path="/account" element={<AuthRoute><Account /></AuthRoute>} >
+                        <Route path="password" element={<PasswordChangeForm />} />
                     </Route>
                 </Routes>
             </BrowserRouter>
