@@ -12,7 +12,7 @@ Installation
 2. `cd frontend && npm i`
 4. Configure MONGO_URI in root .env file
 
-To start project run from root directory:
+To start project run from project root directory:
 `npm run server`
 `npm run client`
 
