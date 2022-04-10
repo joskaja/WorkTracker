@@ -10,7 +10,7 @@ const useStyles = createStyles((theme) => ({
             borderRight: 'none'
         },
         [`@media screen and (max-width: ${theme.breakpoints.md}px)`]: {
-            '&:nth-child(2n)': {
+            '&:nth-of-types(2n)': {
                 borderRight: 'none'
             },
         },

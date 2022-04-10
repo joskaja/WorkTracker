@@ -11,7 +11,7 @@ function PageHeader({ children }) {
                 justifyContent: 'center',
                 marginLeft: 0,
                 marginRight: 0,
-                '& > *:nth-child(1)': {
+                '& > *:nth-of-type(1)': {
                     flexBasis: '100%',
                     textAlign: 'center'
                 }
