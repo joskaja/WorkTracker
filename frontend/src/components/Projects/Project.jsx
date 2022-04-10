@@ -8,7 +8,8 @@ const useStyles = createStyles(theme => ({
         display: 'flex',
         flexDirection: 'column',
         height: '100%',
-        borderColor: theme.colorScheme === 'dark' ? theme.colors.dark[4] : ''
+        borderColor: theme.colorScheme === 'dark' ? theme.colors.dark[4] : '',
+        boxShadow: 'none'
     },
     icon: {
         flexShrink: 0,
