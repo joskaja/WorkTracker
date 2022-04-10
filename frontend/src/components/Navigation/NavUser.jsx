@@ -1,7 +1,7 @@
 import React from 'react'
 import { UnstyledButton, Group, Avatar, Box, Text, Menu } from '@mantine/core'
 import { useDispatch, useSelector } from 'react-redux'
-import { IoLogOutOutline, IoSettingsOutline } from 'react-icons/io5'
+import { IoLogOutOutline, IoSettingsOutline, IoLaptopOutline } from 'react-icons/io5'
 import { logout, reset } from '../../features/Auth/authSlice';
 import { useNavigate, Link } from 'react-router-dom';
 
@@ -20,17 +20,25 @@ function NavUser() {
         <Box px="md">
             {user && (
                 <>
-                    <Menu control={<UnstyledButton>
-                        <Group>
-                            <Avatar size={40} color='indigo'>{user.firstName.slice(0, 1) + user.lastName.slice(0, 1)}</Avatar>
-                            <div>
-                                <Text>{user.firstName} {user.lastName}</Text>
-                                <Text size="xs" color="gray">{user.email}</Text>
-                            </div>
-                        </Group>
-                    </UnstyledButton>
-                    }>
+                    <Menu
+                        control={
+                            <UnstyledButton>
+                                <Group>
+                                    <Avatar size={40} color='indigo'>{user.firstName.slice(0, 1) + user.lastName.slice(0, 1)}</Avatar>
+                                    <div>
+                                        <Text>{user.firstName} {user.lastName}</Text>
+                                        <Text size="xs" color="gray">{user.email}</Text>
+                                    </div>
+                                </Group>
+                            </UnstyledButton>
+                        }>
                         <Menu.Label>Uživatel</Menu.Label>
+                        <Menu.Item
+                            component={Link} to="/"
+                            icon={<IoLaptopOutline size={14} />}
+                        >
+                            Úvodní obrazovka
+                        </Menu.Item>
                         <Menu.Item
                             component={Link} to="/account/password"
                             icon={<IoSettingsOutline size={14} />}
