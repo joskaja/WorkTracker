@@ -8,7 +8,7 @@ import moment from 'moment'
 function FilterForm({ filters, setFilters, onReset }) {
     return (
         <Box>
-            <Group>
+            <Group mb="md">
                 <DateRangePicker
                     label="Rozmezí"
                     dateRange={filters.dateRange}
@@ -16,7 +16,7 @@ function FilterForm({ filters, setFilters, onReset }) {
                     variant="default"
                     noArrows
                 />
-                <InputWrapper label="Aktuální: ">
+                <InputWrapper label="Rychlé nastavení rozmezí: ">
                     <Group>
                         <Button
                             variant="light"
@@ -63,14 +63,18 @@ function FilterForm({ filters, setFilters, onReset }) {
                     </Group>
                 </InputWrapper>
             </Group>
-            <ClientSelect
-                value={filters.client}
-                onChange={(val) => setFilters({ ...filters, client: val?._id || '' })}
-            />
-            <ProjectSelect
-                value={filters.project}
-                onChange={(val) => setFilters({ ...filters, project: val?._id || '' })}
-            />
+            <Box mb="md">
+                <ClientSelect
+                    value={filters.client}
+                    onChange={(val) => setFilters({ ...filters, client: val?._id || '' })}
+                />
+            </Box>
+            <Box mb="md">
+                <ProjectSelect
+                    value={filters.project}
+                    onChange={(val) => setFilters({ ...filters, project: val?._id || '' })}
+                />
+            </Box>
             <Center>
                 <Button
                     mt="md"

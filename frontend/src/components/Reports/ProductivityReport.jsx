@@ -2,6 +2,8 @@ import React from 'react'
 import moment from 'moment';
 import { Box, Skeleton, useMantineTheme } from '@mantine/core';
 import { Bar, BarChart, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import { createDurationString } from '../../utils/time';
+
 const prepareChartData = (range) => {
     const chartData = {};
     const start = moment(range[0]);
@@ -34,7 +36,9 @@ function ProductivityReport({ range, data, loading }) {
             {(chartData.length > 0 && !loading) &&
                 <ResponsiveContainer width="100%" height={400}>
                     <BarChart data={chartData} width={500} height={400}>
-                        <Tooltip />
+                        <Tooltip
+                            formatter={(value) => createDurationString(value * 60 * 60 * 1000)}
+                        />
                         <XAxis dataKey="name" />
                         <YAxis />
                         <Legend verticalAlign="bottom" iconType="circle" height={36} />

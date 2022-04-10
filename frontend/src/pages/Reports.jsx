@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Box, Grid, Paper, Title, Button, Modal } from '@mantine/core'
+import { Box, Grid, Paper, Title, Button, Drawer } from '@mantine/core'
 import AppShell from '../components/AppShell'
 import moment from 'moment';
 import WorkSessionList from '../components/WorkSessions/WorkSessionList'
@@ -29,11 +29,11 @@ function Reports() {
 
     const [filters, setFilters] = useState(initialFilters);
 
-    console.log(filters)
-
+    
     const [filterOpened, setFilterOpened] = useState(false);
-
+    
     useEffect(() => {
+        console.log(filters)
         if (filters.dateRange[0] && filters.dateRange[1]) {
             setLoading(true);
             const queryParams = new URLSearchParams({
@@ -102,11 +102,18 @@ function Reports() {
                     </Paper>
                 </Grid.Col>
             </Grid>
-            <Modal
+            <Drawer
                 opened={filterOpened}
                 onClose={() => setFilterOpened(false)}
                 title="Filtrovat"
+                padding="xl"
                 size="lg"
+                position="right"
+                styles={{
+                    drawer: {
+                        borderRadius: 0
+                    }
+                }}
             >
                 <FilterForm
                     filters={filters}
@@ -116,7 +123,7 @@ function Reports() {
                         setFilterOpened(false);
                     }}
                 />
-            </Modal>
+            </Drawer>
         </AppShell>
     )
 }
