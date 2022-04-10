@@ -31,8 +31,6 @@ function Reports() {
     const [filters, setFilters] = useState(initialFilters);
 
     const [filterOpened, setFilterOpened] = useState(false);
-    const [client, setClient] = useState('');
-    const [project, setProject] = useState('');
 
     useEffect(() => {
         if (dateRange[0] && dateRange[1]) {

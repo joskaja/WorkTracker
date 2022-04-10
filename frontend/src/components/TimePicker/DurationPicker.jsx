@@ -2,11 +2,8 @@ import { ActionIcon, Group, TextInput } from '@mantine/core'
 import React, { useState, useEffect } from 'react'
 import moment from 'moment';
 import { IoAddCircle, IoRemoveCircle } from 'react-icons/io5'
+import { createDurationString } from '../../utils/time'
 
-const createDurationString = (milliseconds) => {
-    let duration = moment.duration(milliseconds);
-    return `${duration.get('hours')} h ${duration.get('minutes')} min`;
-}
 
 function DurationPicker({ duration, onChange }) {
     const [durationString, setDurationString] = useState(createDurationString(duration));

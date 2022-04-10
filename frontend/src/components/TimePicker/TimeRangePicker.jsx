@@ -3,12 +3,8 @@ import React, { useEffect, useState } from 'react'
 import moment from 'moment';
 import TimePicker from './TimePicker'
 import DurationPicker from './DurationPicker';
+import { countDuration } from '../../utils/time';
 
-const countDuration = (startTime, endTime) => {
-    const start = moment(startTime, 'HH:mm');
-    const end = moment(endTime, 'HH:mm');
-    return moment.duration(end.diff(start)).asMilliseconds()
-}
 
 function TimeRangePicker({ startTime, endTime, setTime }) {
 

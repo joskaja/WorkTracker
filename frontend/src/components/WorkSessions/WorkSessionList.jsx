@@ -1,13 +1,14 @@
-import { ActionIcon, Box, Skeleton, Table, Title } from '@mantine/core'
-import { useNotifications } from '@mantine/notifications';
+import { ActionIcon, Box, Skeleton, Table } from '@mantine/core'
+import { useNotifications } from '@mantine/notifications'
 import React, { useEffect } from 'react'
-import { IoTrashBinOutline, IoPencil } from 'react-icons/io5';
-import moment from 'moment';
-import { useDispatch, useSelector } from 'react-redux';
-import { deleteWorkSession, resetStatus } from '../../features/WorkSessions/workSessionsSlice';
-import { IoCloseCircleSharp, IoCheckmarkCircleSharp } from 'react-icons/io5';
+import { IoTrashBinOutline, IoPencil } from 'react-icons/io5'
+import moment from 'moment'
+import { useDispatch, useSelector } from 'react-redux'
+import { deleteWorkSession, resetStatus } from '../../features/WorkSessions/workSessionsSlice'
+import { IoCloseCircleSharp, IoCheckmarkCircleSharp } from 'react-icons/io5'
+import { createDurationString } from '../../utils/time'
 
-function WorkSessionList({ data, fullDates, noActions, editWorkSession, ...props }) {
+function WorkSessionList({ data, fullDates, noActions, editWorkSession }) {
     const notifications = useNotifications();
     const dispatch = useDispatch();
     const { status, message } = useSelector(state => state.workSessions);
@@ -55,17 +56,17 @@ function WorkSessionList({ data, fullDates, noActions, editWorkSession, ...props
                     {data.map((session) => {
                         const start = moment(session.startTime);
                         const end = moment(session.endTime);
-                        const duration = moment.duration(end.diff(start));
-                        totalHours += duration.asHours();
-                        totalAmount += duration.asHours() * (session?.project?.hourRate || 0);
+                        const amount = session.duration * (session?.project?.hourRate || 0);
+                        totalHours += session.duration;
+                        totalAmount += amount;
                         return (
                             <tr key={session._id}>
                                 <td>{start.format(fullDates ? 'DD.MM.YYYY HH:mm' : 'HH:mm')} - {end.format('HH:mm')}</td>
                                 <td>{session.description}</td>
                                 <td>{session?.project?.name}</td>
                                 <td>{session?.client?.name}</td>
-                                <td>{duration.asHours()}&nbsp;h</td>
-                                <td>{duration.asHours() * (session?.project?.hourRate || 0)}&nbsp;Kč</td>
+                                <td>{createDurationString(session.duration * 60 * 60 * 1000)}</td>
+                                <td>{amount.toLocaleString('cs-CZ', { maximumFractionDigits: 2 })}&nbsp;Kč</td>
                                 {!noActions &&
                                     <td>
                                         <ActionIcon
@@ -91,8 +92,8 @@ function WorkSessionList({ data, fullDates, noActions, editWorkSession, ...props
                 <tfoot>
                     <tr>
                         <th colSpan={4}>Celkem: </th>
-                        <th>{totalHours}&nbsp;h</th>
-                        <th>{totalAmount}&nbsp;Kč</th>
+                        <th>{createDurationString(totalHours*60*60*1000)}</th>
+                        <th>{totalAmount.toLocaleString('cs-CZ', { maximumFractionDigits: 2 })}&nbsp;Kč</th>
                         <th>&nbsp;</th>
                     </tr>
                 </tfoot>

@@ -1,6 +1,6 @@
 import { createStyles, Grid } from '@mantine/core';
 import React from 'react'
-
+import { createDurationString } from '../../utils/time';
 
 const useStyles = createStyles((theme) => ({
     box: {
@@ -48,11 +48,11 @@ function Totals({ data }) {
         <Grid>
             <Grid.Col sm={6} md={3} className={classes.box}>
                 <div className={classes.title}>Počet hod.</div>
-                <div className={classes.value}>{totalHours}&nbsp;hod.</div>
+                <div className={classes.value}>{createDurationString(totalHours*60*60*1000)}</div>
             </Grid.Col>
             <Grid.Col sm={6} md={3} className={classes.box}>
                 <div className={classes.title}>Částka celkem</div>
-                <div className={classes.value}>{totalAmount}&nbsp;Kč</div>
+                <div className={classes.value}>{totalAmount.toLocaleString('cs-CZ', {maximumFractionDigits: 2})}&nbsp;Kč</div>
             </Grid.Col>
             <Grid.Col sm={6} md={3} className={classes.box}>
                 <div className={classes.title}>Zákazníci</div>

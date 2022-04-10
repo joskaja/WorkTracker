@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react'
 import { ResponsiveContainer, PieChart, Pie, Cell, Legend, Tooltip } from 'recharts';
 import { Box, Skeleton } from '@mantine/core';
+import { createDurationString } from '../../utils/time'
 
 const countChartData = (data) => {
     const chartData = {};
@@ -34,7 +35,9 @@ function ClientsShare({ data, loading }) {
                                 <Cell key={`cell-${index}`} fill={entry.color} />
                             ))}
                         </Pie>
-                        <Tooltip />
+                        <Tooltip
+                            formatter={(value) => createDurationString(value*60*60*1000)}
+                        />
                         <Legend verticalAlign="bottom" iconType="circle" height={36} />
                     </PieChart>
                 </ResponsiveContainer>
