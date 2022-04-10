@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Box, Grid, Center, Paper, Title, Button, Modal } from '@mantine/core'
+import { Box, Grid, Paper, Title, Button, Modal } from '@mantine/core'
 import AppShell from '../components/AppShell'
 import moment from 'moment';
 import WorkSessionList from '../components/WorkSessions/WorkSessionList'
@@ -11,33 +11,34 @@ import Totals from '../components/Reports/Totals'
 import DateRangePicker from '../components/DatePicker/DateRangePicker';
 import PageHeader from '../components/PageHeader';
 import { IoSettingsOutline } from 'react-icons/io5'
-import ClientSelect from '../components/Clients/ClientSelect';
-import ProjectSelect from '../components/Projects/ProjectSelect';
+import FilterForm from '../components/Reports/FilterForm'
 
+const initialFilters = {
+    client: '',
+    project: '',
+    dateRange: [
+        moment().startOf('month').toDate(),
+        moment().endOf('month').toDate()
+    ]
+};
 
 function Reports() {
     const [workSessions, setWorkSessions] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [dateRange, setDateRange] = useState([
-        moment().startOf('month').toDate(),
-        moment().endOf('month').toDate()
-    ]);
 
-    const initialFilters = {
-        client: '',
-        project: ''
-    };
 
     const [filters, setFilters] = useState(initialFilters);
+
+    console.log(filters)
 
     const [filterOpened, setFilterOpened] = useState(false);
 
     useEffect(() => {
-        if (dateRange[0] && dateRange[1]) {
+        if (filters.dateRange[0] && filters.dateRange[1]) {
             setLoading(true);
             const queryParams = new URLSearchParams({
-                startTime: dateRange[0].getTime(),
-                endTime: dateRange[1].getTime(),
+                startTime: filters.dateRange[0].getTime(),
+                endTime: filters.dateRange[1].getTime(),
                 ...filters
             })
 
@@ -52,7 +53,7 @@ function Reports() {
                 setLoading(false);
             });
         }
-    }, [filters, dateRange]);
+    }, [filters]);
 
     return (
         <AppShell>
@@ -60,7 +61,7 @@ function Reports() {
             <PageHeader>
                 <Title order={2}>Výkazy</Title>
                 <Box style={{ textAlign: 'center' }}>
-                    <DateRangePicker dateRange={dateRange} setDateRange={setDateRange} />
+                    <DateRangePicker dateRange={filters.dateRange} setDateRange={(range) => setFilters({ ...filters, dateRange: range })} />
                     <Button
                         variant="subtle"
                         leftIcon={<IoSettingsOutline />}
@@ -79,7 +80,7 @@ function Reports() {
                 <Grid.Col sm={12}>
                     <Title mb="sm" mx="lg" order={4}>Produktivita</Title>
                     <Paper>
-                        <ProductivityReport range={dateRange} data={loading ? [] : workSessions} />
+                        <ProductivityReport range={filters.dateRange} data={loading ? [] : workSessions} />
                     </Paper>
                 </Grid.Col>
                 <Grid.Col sm={12} md={6}>
@@ -107,40 +108,14 @@ function Reports() {
                 title="Filtrovat"
                 size="lg"
             >
-                <Box>
-                    <DateRangePicker
-                        label="Rozmezí"
-                        dateRange={dateRange}
-                        setDateRange={setDateRange}
-                        variant="default"
-                        noArrows
-                    />
-                    <ClientSelect
-                        value={filters.client}
-                        onChange={(val) => setFilters({ ...filters, client: val?._id || '' })}
-                    />
-                    <ProjectSelect
-                        value={filters.project}
-                        onChange={(val) => setFilters({ ...filters, project: val?._id || '' })}
-                    />
-                    <Center>
-                        <Button
-                            mt="md"
-                            variant="subtle"
-                            color="red"
-                            onClick={() => {
-                                setFilters(initialFilters);
-                                setDateRange([
-                                    moment().startOf('month').toDate(),
-                                    moment().endOf('month').toDate()
-                                ])
-                                setFilterOpened(false);
-                            }}
-                        >
-                            Resetovat filtrování
-                        </Button>
-                    </Center>
-                </Box>
+                <FilterForm
+                    filters={filters}
+                    setFilters={setFilters}
+                    onReset={() => {
+                        setFilters(initialFilters);
+                        setFilterOpened(false);
+                    }}
+                />
             </Modal>
         </AppShell>
     )
