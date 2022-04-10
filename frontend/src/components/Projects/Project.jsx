@@ -1,7 +1,7 @@
 import React from 'react'
 import { Paper, Group, Button, Text, Grid, createStyles } from '@mantine/core'
 import { Link } from 'react-router-dom'
-import { IoLogoUsd, IoStorefront } from 'react-icons/io5';
+import { IoLogoUsd, IoStorefront, IoPencilOutline, IoTrashBinOutline } from 'react-icons/io5';
 
 const useStyles = createStyles(theme => ({
     paper: {
@@ -14,7 +14,7 @@ const useStyles = createStyles(theme => ({
     icon: {
         flexShrink: 0,
         fontSize: theme.fontSizes.md,
-        color: theme.colors.cyan
+        color: theme.colors.indigo[9]
     },
     col: {
         whiteSpace: 'nowrap',
@@ -57,11 +57,11 @@ function Project({ data, onDelete }) {
                     </Grid.Col>
                 }
             </Grid>
-            <Group className={classes.footer} grow>
-                <Button component={Link} to={`/projects/${data._id}`}>Upravit</Button>
-                <Button color="red" onClick={() => onDelete(data._id)}>Odstranit</Button>
+            <Group position="center" className={classes.footer}>
+                <Button variant="subtle" leftIcon={<IoPencilOutline />} component={Link} to={`/projects/${data._id}`}>Upravit</Button>
+                <Button variant="subtle" leftIcon={<IoTrashBinOutline />} color="red" onClick={() => onDelete(data._id)}>Odstranit</Button>
             </Group>
-        </Paper>
+        </Paper >
     )
 }
 
