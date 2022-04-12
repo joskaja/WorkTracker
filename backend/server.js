@@ -6,7 +6,6 @@ const { handleError } = require('./middleware/errorMiddleware');
 
 const app = express();
 connectDB();
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 

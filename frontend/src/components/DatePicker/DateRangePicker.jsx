@@ -25,7 +25,7 @@ function DateRangePicker({ dateRange, setDateRange, label, noArrows, variant }) 
                 <Box position="center" >
                     <MantineDateRangePicker
                         sx={(theme) => ({
-                            width: 200,
+                            width: variant === 'default' ? '100%' : 200,
                             input: {
                                 fontWeight: 700,
                                 textAlign: variant === 'default' ? 'left' : 'center'

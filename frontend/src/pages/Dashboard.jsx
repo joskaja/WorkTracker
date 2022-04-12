@@ -5,11 +5,12 @@ import WorkSessionForm from '../components/WorkSessions/WorkSessionForm'
 import DatePicker from '../components/DatePicker/DatePicker';
 import WorkSessionList from '../components/WorkSessions/WorkSessionList';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadWorkSessions, setDate } from '../features/WorkSessions/workSessionsSlice';
+import { loadWorkSessions, resetStatus, setDate } from '../features/WorkSessions/workSessionsSlice';
 import { useNotifications } from '@mantine/notifications';
 import { IoCloseCircleSharp } from 'react-icons/io5';
 import moment from 'moment';
 import PageHeader from '../components/PageHeader';
+import WorkSessionTimeLine from '../components/WorkSessions/WorkSessionTimeLine';
 
 function Dashboard() {
     const dispatch = useDispatch();
@@ -19,6 +20,7 @@ function Dashboard() {
 
     useEffect(() => {
         dispatch(loadWorkSessions());
+        dispatch(resetStatus());
     }, [date]);
 
     useEffect(() => {
@@ -30,6 +32,7 @@ function Dashboard() {
                 icon: <IoCloseCircleSharp />
             })
         }
+        dispatch(resetStatus());
     }, [message, status]);
 
     return (
@@ -46,6 +49,9 @@ function Dashboard() {
                     />
                 </Box>
             </PageHeader>
+            <Paper mb="xl">
+                <WorkSessionTimeLine step={4} data={workSessions} editWorkSession={setWorkSessionId} />
+            </Paper>
             <Title mb="sm" mx="lg" order={4}>Nový záznam</Title>
             <Paper mb="xl">
                 <WorkSessionForm sessionId={workSessionId} editWorkSession={setWorkSessionId} />

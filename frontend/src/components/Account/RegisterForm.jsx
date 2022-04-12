@@ -4,7 +4,7 @@ import { MdCancel } from 'react-icons/md';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNotifications } from '@mantine/notifications';
 import { useNavigate } from 'react-router-dom';
-import { register } from '../../features/Auth/authSlice';
+import { register, reset } from '../../features/Auth/authSlice';
 import { useForm } from '@mantine/form';
 
 function RegisterForm() {
@@ -43,10 +43,11 @@ function RegisterForm() {
             });
         }
 
-        if (status === 'success' || user) {
+        if (user) {
             navigate('/dashboard', { replace: true });
         }
 
+        dispatch(reset())
 
     }, [user, status, message]);
 

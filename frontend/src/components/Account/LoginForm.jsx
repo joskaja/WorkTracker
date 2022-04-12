@@ -37,7 +37,7 @@ function LoginForm() {
             });
         }
 
-        if (status === 'success' || user) {
+        if (user) {
             navigate('/dashboard', { replace: true });
         }
 

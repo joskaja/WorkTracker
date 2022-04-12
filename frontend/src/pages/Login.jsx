@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Group, Title, useMantineTheme } from '@mantine/core';
 import { IoPersonCircleOutline } from 'react-icons/io5';
-import Header from '../components/Navigation/Header'
 import AccountFormWrap from '../components/Account/AccountFormWrap';
 import LoginForm from '../components/Account/LoginForm';
 

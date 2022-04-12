@@ -1,6 +1,7 @@
 
 const getCommonOptions = () => {
     const user = JSON.parse(localStorage.getItem('user'));
+    console.log(user);
     const commonOptions = {
         headers: {
             'Content-Type': 'application/json',
@@ -11,6 +12,7 @@ const getCommonOptions = () => {
 }
 
 const get = (url) => {
+    console.log(url);
     const requestOptions = {
         ...getCommonOptions(),
         method: 'GET'

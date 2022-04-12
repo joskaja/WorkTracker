@@ -3,17 +3,15 @@ import { UnstyledButton, Group, Avatar, Box, Text, Menu } from '@mantine/core'
 import { useDispatch, useSelector } from 'react-redux'
 import { IoLogOutOutline, IoSettingsOutline, IoLaptopOutline } from 'react-icons/io5'
 import { logout, reset } from '../../features/Auth/authSlice';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function NavUser() {
     const { user } = useSelector(state => state.auth);
-    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const onLogout = () => {
         dispatch(logout());
         dispatch(reset());
-        navigate('/login', { replace: true });
     }
 
     return (

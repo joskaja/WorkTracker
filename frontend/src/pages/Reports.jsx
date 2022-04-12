@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Box, Grid, Paper, Title, Button, Drawer } from '@mantine/core'
+import { Box, Grid, Paper, Title, Button, Drawer, Group, ActionIcon, Tooltip } from '@mantine/core'
 import AppShell from '../components/AppShell'
 import moment from 'moment';
 import WorkSessionList from '../components/WorkSessions/WorkSessionList'
@@ -29,9 +29,9 @@ function Reports() {
 
     const [filters, setFilters] = useState(initialFilters);
 
-    
+
     const [filterOpened, setFilterOpened] = useState(false);
-    
+
     useEffect(() => {
         console.log(filters)
         if (filters.dateRange[0] && filters.dateRange[1]) {
@@ -60,16 +60,17 @@ function Reports() {
 
             <PageHeader>
                 <Title order={2}>Výkazy</Title>
-                <Box style={{ textAlign: 'center' }}>
+                <Group style={{ textAlign: 'center' }}>
                     <DateRangePicker dateRange={filters.dateRange} setDateRange={(range) => setFilters({ ...filters, dateRange: range })} />
-                    <Button
-                        variant="subtle"
-                        leftIcon={<IoSettingsOutline />}
-                        onClick={() => setFilterOpened(true)}
-                    >
-                        Pokročilé filtrování
-                    </Button>
-                </Box>
+                    <Tooltip label="Pokročilé filtrování" withArrow>
+                        <ActionIcon
+                            color="indigo"
+                            onClick={() => setFilterOpened(true)}
+                        >
+                            <IoSettingsOutline />
+                        </ActionIcon>
+                    </Tooltip>
+                </Group>
             </PageHeader>
             <Grid gutter="xl">
                 <Grid.Col sm={12}>
