@@ -86,7 +86,7 @@ function Landing() {
                             <Title className={classes.title}>WorkTracker</Title>
                             <Title className={classes.subtitle}>Mějte vždy přehled o svém čase</Title>
                             {!user ?
-                                <Group>
+                                <Group position="center">
                                     <Button
                                         radius="xl"
                                         component={Link}
