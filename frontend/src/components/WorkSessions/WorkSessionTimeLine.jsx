@@ -2,6 +2,10 @@ import { Box, createStyles, Tooltip } from '@mantine/core'
 import React, { useMemo } from 'react'
 
 const useStyles = createStyles((theme) => ({
+    wrapper: {
+        position: 'relative',
+        paddingBottom: 10
+    },
     label: {
         position: 'absolute',
         display: 'inline-block',
@@ -12,7 +16,7 @@ const useStyles = createStyles((theme) => ({
     timeline: {
         width: '100%',
         height: 30,
-        background: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[2]
+        background: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[2],
     },
     item: {
         position: 'absolute',
@@ -43,7 +47,7 @@ function WorkSessionTimeLine({ data, step, editWorkSession }) {
 
 
     return (
-        <Box style={{ position: 'relative' }}>
+        <Box className={classes.wrapper}>
             <Box className={classes.timeline}>
                 {data.map((session) => {
                     const start = new Date(session.startTime);

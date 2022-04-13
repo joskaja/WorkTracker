@@ -49,7 +49,7 @@ function Reports() {
                     session.time = moment.duration(end.diff(start)).asHours();
                     return session;
                 });
-                setWorkSessions(state => data);
+                setWorkSessions(data);
                 setLoading(false);
             });
         }
