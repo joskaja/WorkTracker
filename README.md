@@ -8,13 +8,11 @@ Prerequisites
 
 Installation
 ---------
-1. `npm i`
-2. `cd frontend && npm i`
-4. Configure MONGO_URI in root .env file
+**Build**
+`npm install && npm install --prefix frontend`
 
-To start project run from project root directory:
-`npm run server`
-`npm run client`
+**Run**
+`npm run dev`
 
 Screenshots
 ---------
