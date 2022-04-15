@@ -1,7 +1,9 @@
 # WorkTracker
 
 WorkTracker is an app for recording your (work) sessions 
-and gives you reports about how your time was spent.
+and gives you reports about how your time was spent.  
+
+Demo: https://worktracker.joska-jan.cz/
 
 Prerequisites
 ---------
@@ -11,12 +13,19 @@ Prerequisites
 
 Installation
 ---------
-**Build**  
 
-`npm install && npm install --prefix frontend`
+**Needed ENV variables:**
+```
+NODE_ENV = development / production
+PORT = 5000
+MONGO_URI = MongoDB connection string 
+JWT_SECRET = JWT secret string 
+```
 
-**Run**  
+**Build:**  
+`npm install && npm install --prefix frontend`  
 
+**Run:**  
 `npm run dev`
 
 Screenshots
