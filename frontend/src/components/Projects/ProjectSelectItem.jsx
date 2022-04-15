@@ -1,4 +1,4 @@
-import { Box, ColorSwatch, Group, Text } from "@mantine/core";
+import { Box, Group, Text } from "@mantine/core";
 import { forwardRef } from "react";
 
 const ProjectSelectItem = forwardRef(

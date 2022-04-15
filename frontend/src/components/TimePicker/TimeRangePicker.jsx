@@ -8,25 +8,29 @@ import { countDuration } from '../../utils/time';
 
 function TimeRangePicker({ startTime, endTime, setTime }) {
 
-    const [duration, setDuration] = useState(countDuration(startTime, endTime));
-
-    useEffect(() => {
-        setDuration(countDuration(startTime, endTime));
-    }, [startTime, endTime]);
-
-
+    /*     const [duration, setDuration] = useState(countDuration(startTime, endTime));
+     */
+    const duration = countDuration(startTime, endTime);
+    /* 
+        useEffect(() => {
+            setDuration();
+        }, [startTime, endTime]);
+    
+     */
     const setStartTime = (time) => {
         let start = moment(time, 'HH:mm');
         let end = moment(endTime, 'HH:mm');
-        if (end.diff(start) < 0) time = end.subtract(1, 'hours').format('HH:mm');
         setTime('startTime', time);
+        if (end.diff(start) <= 0) {
+            const newEnd = start.clone().add(duration, 'milliseconds');
+            setEndTime(newEnd.format('HH:mm'))
+        }
     }
 
     const setEndTime = (time) => {
         let start = moment(startTime, 'HH:mm');
         let end = moment(time, 'HH:mm');
-        if (end.diff(start) < 0) time = start.add(1, 'hours').format('HH:mm');
-        if (end.isAfter(start.endOf('day').subtract(1, 'minute'))) time = '23:59';
+        if (end.diff(start) <= 0) time = '23:59';
         setTime('endTime', time);
     }
 
@@ -35,8 +39,7 @@ function TimeRangePicker({ startTime, endTime, setTime }) {
             <TimePicker
                 label="Začátek"
                 time={startTime}
-                onChange={(time) => setStartTime(time)
-                }
+                onChange={(time) => setStartTime(time)}
             />
             <Box style={{ marginTop: '1.4rem' }}> - </Box>
             <TimePicker
