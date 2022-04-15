@@ -1,5 +1,8 @@
 # WorkTracker
 
+WorkTracker is an app for recording your (work) sessions 
+and gives you reports about how your time was spent.
+
 Prerequisites
 ---------
 - [MongoDB](https://www.mongodb.com/)
@@ -8,10 +11,12 @@ Prerequisites
 
 Installation
 ---------
-**Build**
+**Build**  
+
 `npm install && npm install --prefix frontend`
 
-**Run**
+**Run**  
+
 `npm run dev`
 
 Screenshots
