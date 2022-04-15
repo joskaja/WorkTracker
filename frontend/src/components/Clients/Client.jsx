@@ -17,7 +17,7 @@ const useStyles = createStyles(theme => ({
         fontSize: theme.fontSizes.md,
         color: theme.colors.indigo
     },
-    col: {
+    text: {
         whiteSpace: 'nowrap',
         overflow: 'hidden',
         textOverflow: 'ellipsis'
@@ -47,38 +47,38 @@ function Client({ data, onDelete }) {
                     <Grid.Col sm={12}>
                         <Group noWrap spacing="xs">
                             <IoLogoUsd className={classes.icon} />
-                            <Text>{data.defaultHourRate}&nbsp;Kč</Text>
+                            <Text className={classes.text}>{data.defaultHourRate}&nbsp;Kč</Text>
                         </Group>
                     </Grid.Col>
                 }
                 {data.email &&
-                    <Grid.Col sm={12} md={6} className={classes.col}>
+                    <Grid.Col sm={12} md={6}>
                         <Group noWrap spacing="xs">
                             <IoIosMail className={classes.icon} />
-                            <Text>{data.email}</Text>
+                            <Text className={classes.text}>{data.email}</Text>
                         </Group>
                     </Grid.Col>
                 }
                 {data.phone &&
-                    <Grid.Col sm={12} md={6} className={classes.col}>
+                    <Grid.Col sm={12} md={6}>
                         <Group noWrap spacing="xs">
                             <IoIosCall className={classes.icon} />
-                            <Text>{data.phone}</Text>
+                            <Text className={classes.text}>{data.phone}</Text>
                         </Group>
                     </Grid.Col>
                 }
                 {(data.address && data.address.street) &&
-                    <Grid.Col sm={12} className={classes.col}>
+                    <Grid.Col sm={12}>
                         <Group noWrap spacing="xs">
                             <IoIosBusiness className={classes.icon} />
-                            <Text>{Object.values(data.address).join(', ')}</Text>
+                            <Text className={classes.text}>{Object.values(data.address).join(', ')}</Text>
                         </Group>
                     </Grid.Col>
                 }
             </Grid>
             <Group position="center" className={classes.footer}>
-                <Button variant="subtle"  leftIcon={<IoPencilOutline />} component={Link} to={`/clients/${data._id}`}>Upravit</Button>
-                <Button variant="subtle"  leftIcon={<IoTrashBinOutline />} color="red" onClick={() => onDelete(data._id)}>Odstranit</Button>
+                <Button variant="subtle" leftIcon={<IoPencilOutline />} component={Link} to={`/clients/${data._id}`}>Detail</Button>
+                <Button variant="subtle" leftIcon={<IoTrashBinOutline />} color="red" onClick={() => onDelete(data._id)}>Odstranit</Button>
             </Group>
         </Paper>
     )
