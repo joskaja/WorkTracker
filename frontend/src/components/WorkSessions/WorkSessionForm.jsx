@@ -7,7 +7,7 @@ import TimeRangePicker from '../TimePicker/TimeRangePicker';
 import ProjectSelect from '../Projects/ProjectSelect';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
-import { apiRequestService } from '../../services/apiRequestService';
+import { apiService } from '../../services/apiService';
 import { useNotifications } from '@mantine/notifications';
 import { IoCheckmarkCircleSharp, IoCloseCircleSharp, IoSave } from 'react-icons/io5'
 import { createWorkSession, updateWorkSession, resetStatus, setDate } from '../../features/WorkSessions/workSessionsSlice';
@@ -38,7 +38,7 @@ function WorkSessionForm({ sessionId, editWorkSession }) {
     useEffect(() => {
         if (sessionId) {
             setLoading(true);
-            apiRequestService.get('/api/work-sessions/' + sessionId).then(data => {
+            apiService.get('/api/work-sessions/' + sessionId).then(data => {
                 const formData = {
                     ...data,
                     startTime: moment(data.startTime).format('HH:mm'),

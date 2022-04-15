@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Center, createStyles, Grid, Skeleton } from '@mantine/core';
 import { useNavigate } from 'react-router-dom';
-import { apiRequestService } from '../../services/apiRequestService';
+import { apiService } from '../../services/apiService';
 import Client from './Client';
 const useStyles = createStyles(theme => ({
     clientName: {
@@ -20,7 +20,7 @@ function ClientsList() {
     const [clients, setClients] = useState([]);
     const [loading, setLoading] = useState(true);
     useEffect(() => {
-        apiRequestService.get('/api/clients').then(data => {
+        apiService.get('/api/clients').then(data => {
             setClients(data);
             setLoading(false);
         });
@@ -29,7 +29,7 @@ function ClientsList() {
         // eslint-disable-next-line no-restricted-globals
         if (confirm('Opravdu chcete odstranit tohoto zákazníka?')) {
             setLoading(true);
-            apiRequestService.delete('/api/clients/' + id).then(() => {
+            apiService.delete('/api/clients/' + id).then(() => {
                 setClients(state => state.filter(client => client._id !== id));
                 setLoading(false);
             })

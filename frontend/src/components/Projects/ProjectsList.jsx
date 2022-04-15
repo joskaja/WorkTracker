@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Grid, Skeleton, Center} from '@mantine/core';
-import { apiRequestService } from '../../services/apiRequestService';
+import { apiService } from '../../services/apiService';
 import { useNotifications } from '@mantine/notifications';
 import Project from './Project';
 
@@ -10,7 +10,7 @@ function ProjectsList() {
     const [projects, setProjects] = useState([]);
     const [loading, setLoading] = useState(true);
     useEffect(() => {
-        apiRequestService.get('/api/projects').then(data => {
+        apiService.get('/api/projects').then(data => {
             setProjects(data);
             setLoading(false);
         }).catch(e => {
@@ -25,7 +25,7 @@ function ProjectsList() {
         // eslint-disable-next-line no-restricted-globals
         if (confirm('Opravdu chcete odstranit tento projekt?')) {
             setLoading(true);
-            apiRequestService.delete('/api/projects/' + id).then(() => {
+            apiService.delete('/api/projects/' + id).then(() => {
                 setProjects(state => state.filter(project => project._id !== id));
                 setLoading(false);
             })

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { Box, Grid, Paper, Title, Button, Drawer, Group, ActionIcon, Tooltip } from '@mantine/core'
+import { Grid, Paper, Title, Drawer, Group, ActionIcon, Tooltip } from '@mantine/core'
 import AppShell from '../components/AppShell'
 import moment from 'moment';
 import WorkSessionList from '../components/WorkSessions/WorkSessionList'
-import { apiRequestService } from '../services/apiRequestService'
+import { apiService } from '../services/apiService'
 import ClientsShare from '../components/Reports/ClientsShare'
 import ProjectsShare from '../components/Reports/ProjectsShare'
 import ProductivityReport from '../components/Reports/ProductivityReport'
@@ -42,7 +42,7 @@ function Reports() {
                 ...filters
             })
 
-            apiRequestService.get('/api/work-sessions?' + queryParams.toString()).then(data => {
+            apiService.get('/api/work-sessions?' + queryParams.toString()).then(data => {
                 data = data.map(session => {
                     const start = moment(session.startTime);
                     const end = moment(session.endTime);

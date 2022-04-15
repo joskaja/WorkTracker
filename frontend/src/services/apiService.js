@@ -38,6 +38,15 @@ const put = (url, data) => {
     return fetch(url, requestOptions).then(handleResponse);
 }
 
+const patch = (url, data) => {
+    const requestOptions = {
+        ...getCommonOptions(),
+        method: 'PATCH',
+        body: JSON.stringify(data)
+    }
+    return fetch(url, requestOptions).then(handleResponse);
+}
+
 const _delete = (url) => {
     const requestOptions = {
         ...getCommonOptions(),
@@ -60,10 +69,11 @@ const handleResponse = (response) => {
     })
 }
 
-export const apiRequestService = {
+export const apiService = {
     get,
     post,
     put,
+    patch,
     delete: _delete
 }
 

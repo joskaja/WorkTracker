@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { Select } from '@mantine/core'
 import ProjectSelectItem from './ProjectSelectItem';
-import { apiRequestService } from '../../services/apiRequestService';
+import { apiService } from '../../services/apiService';
 import { useNotifications } from '@mantine/notifications';
 import { MdCheckCircle, MdError } from 'react-icons/md';
-import { colors } from '../../utils/colors'
 
 
 function ProjectSelect(props) {
@@ -15,7 +14,7 @@ function ProjectSelect(props) {
 
     useEffect(() => {
         setLoading(true);
-        apiRequestService.get('/api/projects')
+        apiService.get('/api/projects')
             .then(projects => {
                 projects = projects.map(project => ({ ...project, label: project.name, value: project._id }));
                 setProjects(projects);
@@ -25,7 +24,7 @@ function ProjectSelect(props) {
 
     const quickCreate = (name) => {
         setLoading(true);
-        apiRequestService.post('/api/projects', { name }).then(project => {
+        apiService.post('/api/projects', { name }).then(project => {
             setProjects(projects => [...projects, { ...project, label: project.name, value: project._id }]);
             notifications.showNotification({
                 title: 'Úspěch',

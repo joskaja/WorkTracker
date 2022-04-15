@@ -3,7 +3,7 @@ import { useForm } from '@mantine/hooks'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import React, { useEffect, useState } from 'react'
 import { MdArrowBack, MdCheckCircle, MdError } from 'react-icons/md'
-import { apiRequestService } from '../../services/apiRequestService'
+import { apiService } from '../../services/apiService'
 import { useNotifications } from '@mantine/notifications'
 import { colors } from '../../utils/colors'
 
@@ -32,7 +32,7 @@ function ClientForm() {
     useEffect(() => {
         if (clientID) {
             setLoading(true);
-            apiRequestService.get('/api/clients/' + clientID).then(data => {
+            apiService.get('/api/clients/' + clientID).then(data => {
                 form.setValues({ ...data, ...data.address });
                 setLoading(false);
             })
@@ -43,9 +43,9 @@ function ClientForm() {
         setLoading(true);
         let request;
         if (clientID) {
-            request = apiRequestService.put('/api/clients/' + clientID, formData);
+            request = apiService.put('/api/clients/' + clientID, formData);
         } else {
-            request = apiRequestService.post('/api/clients', formData);
+            request = apiService.post('/api/clients', formData);
         }
         request.then((data) => {
             onClientSaved();

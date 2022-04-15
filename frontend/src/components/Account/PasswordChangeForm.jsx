@@ -3,7 +3,7 @@ import { IoCheckmarkCircleSharp, IoCloseCircleSharp } from 'react-icons/io5'
 import { useForm } from '@mantine/form'
 import { useNotifications } from '@mantine/notifications';
 import React from 'react'
-import { apiRequestService } from '../../services/apiRequestService';
+import { apiService } from '../../services/apiService';
 
 function PasswordChangeForm() {
     const notifications = useNotifications();
@@ -17,7 +17,7 @@ function PasswordChangeForm() {
 
     const changePassword = (values) => {
         if (form.validate()) {
-            apiRequestService.post('/api/users/password', values).then(data => {
+            apiService.patch('/api/users/password', values).then(data => {
                 notifications.showNotification({
                     title: 'Úspěch',
                     autoClose: 4000,

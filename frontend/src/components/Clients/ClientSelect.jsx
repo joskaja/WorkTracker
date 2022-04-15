@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Select } from '@mantine/core'
 import ClientSelectItem from './ClientSelectItem';
-import { apiRequestService } from '../../services/apiRequestService';
+import { apiService } from '../../services/apiService';
 import { useNotifications } from '@mantine/notifications';
 import { MdCheckCircle, MdError } from 'react-icons/md';
 import { colors } from '../../utils/colors'
@@ -13,7 +13,7 @@ function ClientSelect(props) {
     const [clients, setClients] = useState([]);
     useEffect(() => {
         setLoading(true);
-        apiRequestService.get('/api/clients').then(clients => {
+        apiService.get('/api/clients').then(clients => {
             clients = clients.map(client => ({ ...client, label: client.name, value: client._id }));
             setClients(clients);
             setLoading(false);
@@ -22,7 +22,7 @@ function ClientSelect(props) {
 
     const quickCreate = (name) => {
         setLoading(true);
-        apiRequestService.post('/api/clients', { name, color: colors.randomColor() }).then(client => {
+        apiService.post('/api/clients', { name, color: colors.randomColor() }).then(client => {
             setClients(clients => [...clients, { ...client, label: client.name, value: client._id }]);
             notifications.showNotification({
                 title: 'Úspěch',

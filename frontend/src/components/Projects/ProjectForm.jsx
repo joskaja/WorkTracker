@@ -3,7 +3,7 @@ import { useForm } from '@mantine/hooks'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import React, { useEffect, useState } from 'react'
 import { MdArrowBack, MdCheckCircle, MdError } from 'react-icons/md'
-import { apiRequestService } from '../../services/apiRequestService'
+import { apiService } from '../../services/apiService'
 import { useNotifications } from '@mantine/notifications'
 import ClientSelect from '../Clients/ClientSelect'
 
@@ -28,7 +28,7 @@ function ProjectForm() {
         const fetchData = async () => {
             setLoading(true);
             if (projectID) {
-                const project = await apiRequestService.get('/api/projects/' + projectID);
+                const project = await apiService.get('/api/projects/' + projectID);
                 form.setValues(project);
             }
             setLoading(false);
@@ -40,9 +40,9 @@ function ProjectForm() {
         setLoading(true);
         let request;
         if (projectID) {
-            request = apiRequestService.put('/api/projects/' + projectID, formData);
+            request = apiService.put('/api/projects/' + projectID, formData);
         } else {
-            request = apiRequestService.post('/api/projects', formData);
+            request = apiService.post('/api/projects', formData);
         }
         request.then((data) => {
             onProjectSaved();

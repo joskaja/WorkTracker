@@ -1,8 +1,8 @@
-import { apiRequestService } from '../../services/apiRequestService';
+import { apiService } from '../../services/apiService';
 const API_URL = '/api/users';
 
 const register = async (user) => {
-    let data = await apiRequestService.post(API_URL, user);
+    let data = await apiService.post(API_URL, user);
     const userData = data.user;
     if (data) {
         localStorage.setItem('user', JSON.stringify(userData));
@@ -12,7 +12,7 @@ const register = async (user) => {
 }
 
 const login = async (user) => {
-    let data = await apiRequestService.post(API_URL + '/login', user);
+    let data = await apiService.post(API_URL + '/login', user);
     const userData = data.user;
     if (data) {
         localStorage.setItem('user', JSON.stringify(userData));
