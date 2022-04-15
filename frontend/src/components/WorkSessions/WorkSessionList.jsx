@@ -1,4 +1,4 @@
-import { ActionIcon, Box, Skeleton, Table } from '@mantine/core'
+import { ActionIcon, Box, Button, Skeleton, Table } from '@mantine/core'
 import { useNotifications } from '@mantine/notifications'
 import React, { useEffect } from 'react'
 import { IoTrashBinOutline, IoPencil } from 'react-icons/io5'
@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { deleteWorkSession, resetStatus } from '../../features/WorkSessions/workSessionsSlice'
 import { IoCloseCircleSharp, IoCheckmarkCircleSharp } from 'react-icons/io5'
 import { createDurationString } from '../../utils/time'
+import { Link } from 'react-router-dom'
 
 function WorkSessionList({ data, fullDates, noActions, editWorkSession }) {
     const notifications = useNotifications();
@@ -37,7 +38,7 @@ function WorkSessionList({ data, fullDates, noActions, editWorkSession }) {
 
     let totalHours = 0;
     let totalAmount = 0;
-
+    console.log(data);
     return (
         <Box style={{ overflowX: 'auto' }}>
             <Table verticalSpacing="sm" highlightOnHover>
@@ -62,7 +63,17 @@ function WorkSessionList({ data, fullDates, noActions, editWorkSession }) {
                         return (
                             <tr key={session._id}>
                                 <td>{start.format(fullDates ? 'DD.MM.YYYY HH:mm' : 'HH:mm')} - {end.format('HH:mm')}</td>
-                                <td>{session.description}</td>
+                                <td>
+                                    <Button
+                                        compact
+                                        color="black"
+                                        component={Link}
+                                        variant="subtle"
+                                        to={'/session/' + session._id}
+                                    >
+                                        {session.description}
+                                    </Button>
+                                </td>
                                 <td>{session?.project?.name}</td>
                                 <td>{session?.client?.name}</td>
                                 <td>{createDurationString(session.duration * 60 * 60 * 1000)}</td>
@@ -92,7 +103,7 @@ function WorkSessionList({ data, fullDates, noActions, editWorkSession }) {
                 <tfoot>
                     <tr>
                         <th colSpan={4}>Celkem: </th>
-                        <th>{createDurationString(totalHours*60*60*1000)}</th>
+                        <th>{createDurationString(totalHours * 60 * 60 * 1000)}</th>
                         <th>{totalAmount.toLocaleString('cs-CZ', { maximumFractionDigits: 2 })}&nbsp;Kč</th>
                         <th>&nbsp;</th>
                     </tr>

@@ -39,7 +39,7 @@ function Totals({ data }) {
         totalHours += session.duration;
         if (session.project) projects.add(session.project._id);
         if (session.client) clients.add(session.client._id);
-        if (session.project.hourRate) {
+        if (session?.project?.hourRate) {
             totalAmount += (session.duration * session.project.hourRate);
         }
     });
