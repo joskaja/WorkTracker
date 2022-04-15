@@ -1,5 +1,5 @@
 import { Box, Group } from '@mantine/core'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import moment from 'moment';
 import TimePicker from './TimePicker'
 import DurationPicker from './DurationPicker';
@@ -8,15 +8,9 @@ import { countDuration } from '../../utils/time';
 
 function TimeRangePicker({ startTime, endTime, setTime }) {
 
-    /*     const [duration, setDuration] = useState(countDuration(startTime, endTime));
-     */
+
     const duration = countDuration(startTime, endTime);
-    /* 
-        useEffect(() => {
-            setDuration();
-        }, [startTime, endTime]);
-    
-     */
+   
     const setStartTime = (time) => {
         let start = moment(time, 'HH:mm');
         let end = moment(endTime, 'HH:mm');
