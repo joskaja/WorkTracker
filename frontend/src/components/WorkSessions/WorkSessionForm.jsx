@@ -13,6 +13,13 @@ import { IoCheckmarkCircleSharp, IoCloseCircleSharp, IoSave } from 'react-icons/
 import { createWorkSession, updateWorkSession, resetStatus, setDate } from '../../features/WorkSessions/workSessionsSlice';
 import { useFocus } from '../../utils/hooks';
 
+const workSessionInitialValues = {
+    description: '',
+    project: '',
+    client: '',
+    startTime: moment().subtract(1, 'hour').startOf('hour').format('HH:mm'),
+    endTime: moment().startOf('hour').format('HH:mm'),
+};
 
 function WorkSessionForm({ sessionId, editWorkSession }) {
     const dispatch = useDispatch();
@@ -23,13 +30,7 @@ function WorkSessionForm({ sessionId, editWorkSession }) {
     const [descriptionInputRef, setDescriptionInputFocus] = useFocus();
 
     const form = useForm({
-        initialValues: {
-            description: '',
-            project: '',
-            client: '',
-            startTime: moment().subtract(1, 'hour').startOf('hour').format('HH:mm'),
-            endTime: moment().startOf('hour').format('HH:mm'),
-        },
+        initialValues: workSessionInitialValues,
         validate: {
             description: (value => value.length < 3 ? 'Popisek je povinný a musí mít alespoň 3 znaky' : null)
         }
@@ -97,10 +98,17 @@ function WorkSessionForm({ sessionId, editWorkSession }) {
             const latestTime = moment(sortedWorkSessions[sortedWorkSessions.length - 1].endTime);
             if (latestTime.hour() < 23) {
                 form.setValues({
+                    ...workSessionInitialValues,
                     startTime: latestTime.format('HH:mm'),
                     endTime: latestTime.add(1, 'hour').format('HH:mm')
                 });
             }
+        } else {
+            form.setValues({
+                ...workSessionInitialValues,
+                startTime: moment().subtract(1, 'hour').startOf('hour').format('HH:mm'),
+                endTime: moment().startOf('hour').format('HH:mm')
+            });
         }
     }, [workSessions]);
 

@@ -72,7 +72,11 @@ function WorkSessionTimeLine({ data, step, editWorkSession }) {
             </Box>
             <Box>
                 {times.map(time =>
-                    <Box className={classes.label} style={{ left: `calc(${time / 24 * 100}% - (25px / 2))` }}>
+                    <Box
+                        key={`point_${time}`}
+                        className={classes.label}
+                        style={{ left: `calc(${time / 24 * 100}% - (25px / 2))` }}
+                    >
                         {time}:00
                     </Box>
                 )}

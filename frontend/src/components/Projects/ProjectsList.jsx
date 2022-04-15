@@ -35,15 +35,15 @@ function ProjectsList() {
         <Box>
             <Grid>
                 {projects.length > 0 && projects.map(project => (
-                    <Grid.Col key={project._id} sm={12} md={6} lg={4} xl={3}><Project data={project} onDelete={deleteProject} /></Grid.Col>
+                    <Grid.Col key={project._id} sm={12} md={6} lg={4}><Project data={project} onDelete={deleteProject} /></Grid.Col>
                 ))}
             </Grid>
             {(projects.length < 1 && !loading) && <Center style={{ width: '100%', minHeight: 200 }}>Zatím nemáte žádné projekty</Center>}
             {(projects.length < 1 && loading) && (
                 <Grid align="stretch">
-                    <Grid.Col sm={12} md={6} lg={4} xl={3}><Skeleton height={200} radius="sm" /></Grid.Col>
-                    <Grid.Col sm={12} md={6} lg={4} xl={3}><Skeleton height={200} radius="sm" /></Grid.Col>
-                    <Grid.Col sm={12} md={6} lg={4} xl={3}><Skeleton height={200} radius="sm" /></Grid.Col>
+                    <Grid.Col sm={12} md={6} lg={4}><Skeleton height={200} radius="sm" /></Grid.Col>
+                    <Grid.Col sm={12} md={6} lg={4}><Skeleton height={200} radius="sm" /></Grid.Col>
+                    <Grid.Col sm={12} md={6} lg={4}><Skeleton height={200} radius="sm" /></Grid.Col>
                 </Grid>
             )}
         </Box>

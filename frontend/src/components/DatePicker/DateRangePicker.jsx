@@ -18,7 +18,7 @@ function DateRangePicker({ dateRange, setDateRange, label, noArrows, variant }) 
         <InputWrapper label={label}>
             <Group spacing="xs">
                 {!noArrows &&
-                    <ActionIcon ActionIcon variant="hover" color="primary" onClick={() => derivateRange(-1)}>
+                    <ActionIcon variant="hover" color="primary" onClick={() => derivateRange(-1)}>
                         <IoChevronBack />
                     </ActionIcon>
                 }
