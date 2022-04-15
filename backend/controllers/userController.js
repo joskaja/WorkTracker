@@ -75,17 +75,14 @@ const loginUser = asyncHandler(async (req, res) => {
 @route POST /api/users/password
 **/
 const changeUserPassword = asyncHandler(async (req, res) => {
-    const { oldPassword, newPassword, newPasswordConfirm } = req.body;
+    const { oldPassword, newPassword } = req.body;
     const user = await User.findById(req.user.id);
 
     if (!(user && (await bcrypt.compare(oldPassword, user.password)))) {
         res.status(403);
         throw new Error('Původní heslo je nesprávné.');
     }
-    if (newPassword !== newPasswordConfirm) {
-        res.status(403);
-        throw new Error('Nová hesla se neshodují.');
-    }
+
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(newPassword, salt);
     user.password = hashedPassword;
