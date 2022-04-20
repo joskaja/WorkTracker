@@ -42,7 +42,7 @@ function ClientsShare({ data, loading }) {
                     </PieChart>
                 </ResponsiveContainer>
             }
-            {(workSessionsByClient.length < 1 && !loading) && <Box>Žádná data</Box>}
+            {(data.length < 1 && !loading) && <Box>Žádná data</Box>}
             {loading && <Skeleton width="100%" height={400} radius="sm" />}
         </Box>
     )

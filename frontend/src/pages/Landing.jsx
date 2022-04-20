@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Box, Grid, createStyles, Title, Container, Center, Button, Group } from '@mantine/core'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { IoArrowForward, IoPersonAddOutline, IoPersonOutline } from 'react-icons/io5'
 import timePerson from '../resources/img/time_person.svg';
 import { useSelector } from 'react-redux';
@@ -77,6 +77,14 @@ const useStyles = createStyles(theme => ({
 function Landing() {
     const { user } = useSelector(state => state.auth);
     const { classes } = useStyles();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (user) {
+            navigate('/dashboard');
+        }
+    }, [user])
+
     return (
         <Box className={classes.wrapper}>
             <Container p="xl" size="xl" className={classes.container}>
@@ -85,44 +93,30 @@ function Landing() {
                         <Center className={classes.center}>
                             <Title className={classes.title}>WorkTracker</Title>
                             <Title className={classes.subtitle}>Mějte vždy přehled o svém čase</Title>
-                            {!user ?
-                                <Group position="center">
-                                    <Button
-                                        radius="xl"
-                                        component={Link}
-                                        to="/login"
-                                        size="md"
-                                        variant="gradient"
-                                        className={classes.button}
-                                        rightIcon={<IoPersonOutline />}
-                                    >
-                                        Přihlásit se
-                                    </Button>
-                                    <Button
-                                        radius="xl"
-                                        component={Link}
-                                        to="/register"
-                                        size="md"
-                                        variant="gradient"
-                                        className={classes.button}
-                                        rightIcon={<IoPersonAddOutline />}
-                                    >
-                                        Registrovat se
-                                    </Button>
-                                </Group>
-                                :
+                            <Group position="center">
                                 <Button
                                     radius="xl"
                                     component={Link}
-                                    to="/dashboard"
+                                    to="/login"
                                     size="md"
                                     variant="gradient"
                                     className={classes.button}
-                                    rightIcon={<IoArrowForward />}
+                                    rightIcon={<IoPersonOutline />}
                                 >
-                                    Pokračovat do aplikace
+                                    Přihlásit se
                                 </Button>
-                            }
+                                <Button
+                                    radius="xl"
+                                    component={Link}
+                                    to="/register"
+                                    size="md"
+                                    variant="gradient"
+                                    className={classes.button}
+                                    rightIcon={<IoPersonAddOutline />}
+                                >
+                                    Registrovat se
+                                </Button>
+                            </Group>
                         </Center>
                     </Grid.Col>
                     <Grid.Col sm={12} lg={6} className={classes.imageWrap}>

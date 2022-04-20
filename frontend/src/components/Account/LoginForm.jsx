@@ -42,7 +42,6 @@ function LoginForm() {
         }
 
         dispatch(reset());
-
     }, [user, status, message]);
 
     const submitLogin = (values) => {

@@ -46,8 +46,7 @@ function ProductivityReport({ range, data, loading }) {
                     </BarChart>
                 </ResponsiveContainer>
             }
-            {(chartData.length < 1 && !loading) && <Box>Žádná data</Box>}
-            {loading && <Skeleton width="100%" height={400} radius="sm" />}
+            {chartData && <Skeleton width="100%" height={400} radius="sm" />}
         </Box>
     )
 }
