@@ -11,6 +11,7 @@ import Clients from './pages/Clients';
 import Dashboard from './pages/Dashboard';
 import Landing from './pages/Landing';
 import Login from './pages/Login';
+import NotFound from './pages/NotFound';
 import Projects from './pages/Projects';
 import Register from './pages/Register';
 import Reports from './pages/Reports';
@@ -22,6 +23,7 @@ function Router({ children }) {
             <BrowserRouter>
                 {children}
                 <Routes>
+                    <Route path="*" element={<NotFound />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/" element={<Landing />} />
@@ -29,10 +31,10 @@ function Router({ children }) {
                     <Route path="/reports" element={<AuthRoute><Reports /></AuthRoute>} />
                     <Route path="/projects" element={<AuthRoute><Projects /></AuthRoute>}>
                         <Route index element={<ProjectsList />} />
-                        <Route path="new" element={<ProjectForm/>} />
+                        <Route path="new" element={<ProjectForm />} />
                         <Route path=":projectID" element={<ProjectForm />} />
                     </Route>
-                    <Route path="/session/:sessionID" element={<AuthRoute><Sessions/></AuthRoute>}/>
+                    <Route path="/session/:sessionID" element={<AuthRoute><Sessions /></AuthRoute>} />
                     <Route path="/clients" element={<AuthRoute><Clients /></AuthRoute>} >
                         <Route index element={<ClientsList />} />
                         <Route path="new" element={<ClientForm />} />
@@ -41,6 +43,7 @@ function Router({ children }) {
                     <Route path="/account" element={<AuthRoute><Account /></AuthRoute>} >
                         <Route path="password" element={<PasswordChangeForm />} />
                     </Route>
+                    {/*  */}
                 </Routes>
             </BrowserRouter>
         </>
